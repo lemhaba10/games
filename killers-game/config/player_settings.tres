@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_settings")
 run_speed = 5.0
+hunter_run_speed = 5.2
 walk_speed = 2.5
 acceleration = 24.0
 gravity = 20.0

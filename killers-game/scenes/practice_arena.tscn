@@ -1,8 +1,11 @@
-[gd_scene load_steps=37 format=3]
+[gd_scene load_steps=39 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/practice_arena.gd" id="2_arena"]
 [ext_resource type="Shader" path="res://materials/floor.gdshader" id="3_floor"]
+
+[ext_resource type="PackedScene" path="res://scenes/wandering_bot.tscn" id="4_bot"]
+[ext_resource type="Script" path="res://scripts/practice_navigation.gd" id="5_navigation"]
 
 [sub_resource type="Environment" id="Environment_day"]
 background_mode = 1
@@ -278,6 +281,13 @@ modulate = Color(1, 0.95, 0.83, 1)
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector3(0, 0.1, 10)
 
+[node name="Navigation" type="Node3D" parent="."]
+script = ExtResource("5_navigation")
+
+[node name="Bot" parent="." instance=ExtResource("4_bot")]
+position = Vector3(3, 0.1, 6)
+visible = false
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Title" type="Label" parent="HUD"]
@@ -289,7 +299,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 27
-text = "KILLERS  /  Terrain d'essai"
+text = "KILLERS  /  Entraînement vs IA"
 
 [node name="PlayerName" type="Label" parent="HUD"]
 offset_left = 30.0
@@ -297,7 +307,7 @@ offset_top = 61.0
 offset_right = 400.0
 offset_bottom = 90.0
 theme_override_font_sizes/font_size = 16
-text = "Joueur 1 · Exploration libre"
+text = "Choisissez votre rôle"
 
 [node name="Help" type="Label" parent="HUD"]
 anchors_preset = 12
@@ -367,25 +377,25 @@ theme_override_constants/margin_bottom = 28
 
 [node name="Content" type="VBoxContainer" parent="HUD/Overlay/Center/Card/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 12
 
 [node name="Eyebrow" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.43, 0.84, 0.73, 1)
 theme_override_font_sizes/font_size = 15
-text = "KILLERS · PREMIERS PAS"
+text = "KILLERS · ENTRAÎNEMENT VS IA"
 
 [node name="Heading" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Explorez le labyrinthe"
+text = "Choisissez votre rôle"
 
 [node name="Description" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.82, 0.85, 1)
 theme_override_font_sizes/font_size = 18
-text = "Repérez les passages et les cachettes.
-Contournez les murs et prenez vos marques."
+text = "Votre adversaire prend le rôle opposé.
+Il se déplace au hasard dans le labyrinthe."
 
 [node name="Controls" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
@@ -396,16 +406,36 @@ Maj                                  Marcher doucement
 R                                      Revenir au départ
 Échap                               Libérer la souris"
 
+[node name="Roles" type="HBoxContainer" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Survivor" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content/Roles"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_hover")
+text = "Survivant"
+
+[node name="Hunter" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content/Roles"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_hover")
+text = "Chasseur"
+
 [node name="Resume" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("Style_button")
 theme_override_styles/hover = SubResource("Style_hover")
 theme_override_styles/pressed = SubResource("Style_button")
-text = "Explorer"
+text = "Reprendre"
 
 [node name="Reset" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Revenir au point de départ"
+text = "Recommencer l’entraînement"
 flat = true

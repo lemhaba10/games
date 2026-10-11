@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AISettings" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://config/ai_settings.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+speed_multiplier = 1.0
+destination_pause = 0.4
+minimum_trip_distance = 4.0
+stuck_timeout = 1.5

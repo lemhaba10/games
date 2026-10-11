@@ -11,4 +11,4 @@ Jeu multijoueur de cache-cache et de poursuite en 3D, avec des chasseurs et des 
 - [Règles et conception du jeu](killers/GAME_DESIGN.md)
 - [Consignes pour reprendre le développement](killers/AGENTS.md)
 
-Le dossier `killers` contient la documentation et `killers-game` contient le projet Godot. Le dépôt Git est commun aux deux dossiers. La première étape est jouable : une arène 3D à explorer en vue à la première personne. Le multijoueur et les règles de combat restent à réaliser.
+Le dossier `killers` contient la documentation et `killers-game` contient le projet Godot. Le dépôt Git est commun aux deux dossiers. Le prototype permet de choisir survivant ou chasseur et de se déplacer dans une arène 3D face à un adversaire aux déplacements aléatoires. Le multijoueur et les règles de combat restent à réaliser.

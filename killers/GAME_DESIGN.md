@@ -10,7 +10,7 @@ Le plaisir recherché est partagé : réussir une poursuite doit être satisfais
 
 Les sections « Règles demandées » et « Décisions confirmées » consignent les choix exprimés par les créateurs. Toutes les valeurs introduites dans les sections « Proposition » sont des réglages de départ à essayer, pas des décisions déjà approuvées.
 
-La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu visé ; seule la première étape d'exploration en solo est actuellement implémentée.
+La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu visé ; le prototype actuel permet un entraînement local contre un personnage aux déplacements aléatoires.
 
 ## Règles demandées
 
@@ -19,6 +19,7 @@ La vue à la première personne, le chronomètre commun géré par le jeu et les
 | Univers | Jeu en 3D dans une carte en forme de labyrinthe, vu à travers les yeux du personnage. |
 | Mode 1 contre 1 | Un chasseur contre un survivant. |
 | Mode 2 contre 2 | Deux chasseurs contre deux survivants. |
+| Entraînement contre IA | Choix survivant ou chasseur ; le deuxième personnage prend le rôle opposé et se déplace aléatoirement pour tester la poursuite. |
 | Équipement du chasseur | Trois armes ou outils dans son inventaire, choisis avant de jouer. |
 | Équipement du survivant | Des outils pour fuir, notamment un équipement permettant de courir sur les murs et une grenade fumigène qui gêne la vision des chasseurs sans gêner celle des survivants. Nombre d'emplacements à définir. |
 | Préparation | Le survivant dispose de 30 secondes pour se cacher. |
@@ -52,6 +53,17 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 - **Toutes les valeurs d'équilibrage doivent être configurables facilement**, y compris les recharges. Les 120 secondes du dash sont une valeur de départ, pas une constante définitive : les créateurs pourront essayer 60, 30, 10 secondes ou d'autres valeurs.
 - Commencer avec **Joueur 1 à Joueur 4**, sans comptes ni base de données pour le prototype. Prévoir ensuite des comptes, pseudonymes, scores persistants et un classement fondé sur les victoires, avec des vues de type top 5 ou top 200.
 - Le projet Godot créé par les créateurs se trouve dans **`games/killers-game`**. La documentation reste dans **`games/killers`**, et le dépôt Git commun est **`games`**.
+- Ajouter d'abord un **mode local contre IA**, avec choix du rôle et déplacements aléatoires de l'adversaire, pour tester la poursuite avant de poursuivre les fonctionnalités multijoueurs.
+
+## Entraînement contre IA actuellement disponible
+
+Au lancement, choisir Survivant ou Chasseur. Le personnage contrôlé par le jeu reçoit le rôle opposé, un corps visible et une couleur de tenue : orange pour le chasseur, turquoise pour le survivant. Son nom ne traverse pas les murs.
+
+L'IA choisit au hasard des destinations accessibles et suit des chemins qui contournent les obstacles de l'arène. Ce comportement est identique dans les deux rôles : la détection, la recherche active du joueur et les décisions de fuite ne sont pas encore implémentées. Les armes, dégâts, vies et chronomètres de combat ne font pas encore partie de cet entraînement.
+
+Échap ou la perte de focus met les deux personnages en pause. Le menu permet de reprendre, de recommencer ou de changer de rôle. Le redémarrage replace les deux personnages ; la touche R replace seulement le joueur.
+
+Les réglages initiaux reprennent les propositions de vitesse : 5 m/s pour un survivant et 5,2 m/s pour un chasseur. Les vitesses sont partagées entre joueur et IA dans `config/player_settings.tres`. Un multiplicateur de vitesse propre à l'IA, les pauses entre destinations, la distance minimale visée et le délai de récupération après blocage sont modifiables dans `config/ai_settings.tres`. Ces valeurs restent des réglages d'essai.
 
 ## Proposition de déroulement d'une partie
 
@@ -328,6 +340,7 @@ Le prototype commence avec des joueurs de session sans compte. Les comptes et le
 | Étape | Contenu | Résultat attendu |
 | --- | --- | --- |
 | 1 réalisée | Caméra 3D à la première personne, déplacement, collisions, petite carte | Exploration solo disponible ; lancement et contrôles locaux validés sur Mac |
+| Entraînement IA réalisé | Choix du rôle, adversaire visible et déplacements aléatoires autour des murs | Tester une poursuite locale ; les deux rôles, la navigation et la pause sont validés sur Mac |
 | 2 | Joueur 1 et Joueur 2 en réseau local, identifiants de session, rôles et branche | Un joueur peut poursuivre et toucher l'autre, sans compte ni base de données |
 | 3 | Vies et durées configurables, chronomètre commun, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
 | 4 | Dash configurable, glissade et premiers réglages | Tester notamment une recharge de 120, 60, 30 ou 10 secondes sans changer le code |
@@ -382,4 +395,5 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : commencer sans compte ni base de données avec Joueur 1 à Joueur 4 ; prévoir ensuite des comptes avec pseudonymes, scores persistants et classement des meilleurs joueurs selon les victoires, avec des vues de type top 5 ou top 200. Le barème et la période du classement restent à définir.
 - 11 octobre 2026 : les créateurs initialisent le projet Godot dans `games/killers-game`, l'éditeur ayant demandé un dossier vide. Conserver ce dossier pour le jeu et `games/killers` pour la documentation ; le projet existant utilise Godot 4.7 avec le rendu Compatibility.
 - 11 octobre 2026 : réalisation demandée de la première étape. Ajout d'une arène d'exploration solo, du déplacement à la première personne, de collisions et de réglages modifiables dans l'inspecteur. Validation locale sous Godot 4.7.2 sur Mac ; l'équilibrage en poursuite, le multijoueur et les appareils mobiles restent à tester lors des étapes suivantes.
+- 11 octobre 2026 : ajout demandé et réalisé d'un entraînement contre IA avec choix survivant ou chasseur, personnage opposé visible et déplacements aléatoires. Tests locaux des deux rôles, du contournement des murs et de la pause ; validation visuelle sur Mac. L'IA ne traque ni ne fuit encore activement le joueur.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.

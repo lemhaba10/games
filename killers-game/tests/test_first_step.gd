@@ -31,7 +31,10 @@ func _run() -> void:
 	_check(absf(player.position.y) < 0.05, "Feet stay at floor height")
 	_check(not player.controls_active, "The welcome screen starts with free mouse and no movement")
 
-	arena._set_active(true)
+	arena.start_training(&"survivor")
+	# Isoler les tests du contrôleur des collisions avec le personnage mobile.
+	arena.bot.set_active(false)
+	arena.bot.collision_layer = 0
 	Input.action_press("move_forward")
 	await _frames(60)
 	Input.action_release("move_forward")

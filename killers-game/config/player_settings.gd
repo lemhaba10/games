@@ -4,6 +4,7 @@ extends Resource
 
 @export_group("Déplacement")
 @export_range(0.5, 15.0, 0.1, "suffix:m/s") var run_speed: float = 5.0
+@export_range(0.5, 15.0, 0.1, "suffix:m/s") var hunter_run_speed: float = 5.2
 @export_range(0.5, 10.0, 0.1, "suffix:m/s") var walk_speed: float = 2.5
 @export_range(1.0, 60.0, 0.5, "suffix:m/s²") var acceleration: float = 24.0
 @export_range(1.0, 40.0, 0.5, "suffix:m/s²") var gravity: float = 20.0

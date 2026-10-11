@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/wandering_bot.gd" id="1"]
+[ext_resource type="Resource" path="res://config/player_settings.tres" id="2"]
+[ext_resource type="Resource" path="res://config/ai_settings.tres" id="3"]
+
+[sub_resource type="CapsuleShape3D" id="Body"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Dark"]
+albedo_color = Color(0.08, 0.13, 0.18, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Skin"]
+albedo_color = Color(0.90, 0.74, 0.54, 1)
+roughness = 0.85
+
+[sub_resource type="CapsuleMesh" id="Torso"]
+radius = 0.26
+height = 0.8
+
+[sub_resource type="SphereMesh" id="Head"]
+material = SubResource("Skin")
+radius = 0.22
+height = 0.44
+
+[sub_resource type="CapsuleMesh" id="Limb"]
+material = SubResource("Dark")
+radius = 0.09
+height = 0.6
+
+[sub_resource type="BoxMesh" id="Visor"]
+material = SubResource("Dark")
+size = Vector3(0.30, 0.1, 0.1)
+
+[node name="Bot" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1")
+movement_settings = ExtResource("2")
+ai_settings = ExtResource("3")
+floor_snap_length = 0.2
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("Body")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Model"]
+position = Vector3(0, 1.08, 0)
+mesh = SubResource("Torso")
+
+[node name="Head" type="MeshInstance3D" parent="Model"]
+position = Vector3(0, 1.62, 0)
+mesh = SubResource("Head")
+
+[node name="Visor" type="MeshInstance3D" parent="Model"]
+position = Vector3(0, 1.65, -0.19)
+mesh = SubResource("Visor")
+
+[node name="LeftArm" type="Node3D" parent="Model"]
+position = Vector3(-0.34, 1.32, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Model/LeftArm"]
+position = Vector3(0, -0.24, 0)
+mesh = SubResource("Limb")
+
+[node name="RightArm" type="Node3D" parent="Model"]
+position = Vector3(0.34, 1.32, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Model/RightArm"]
+position = Vector3(0, -0.24, 0)
+mesh = SubResource("Limb")
+
+[node name="LeftLeg" type="Node3D" parent="Model"]
+position = Vector3(-0.14, 0.65, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Model/LeftLeg"]
+position = Vector3(0, -0.27, 0)
+mesh = SubResource("Limb")
+
+[node name="RightLeg" type="Node3D" parent="Model"]
+position = Vector3(0.14, 0.65, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Model/RightLeg"]
+position = Vector3(0, -0.27, 0)
+mesh = SubResource("Limb")
+
+[node name="Name" type="Label3D" parent="."]
+position = Vector3(0, 2.15, 0)
+billboard = 1
+pixel_size = 0.006
+font_size = 40
+outline_size = 8
+text = "IA · Chasseur"
+no_depth_test = false

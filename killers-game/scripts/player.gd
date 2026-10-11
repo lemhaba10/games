@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $Camera3D
 
 var controls_active: bool = false
+var role: StringName = &"survivor"
 var spawn_transform: Transform3D
 
 
@@ -27,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction := Vector3.ZERO
-	var speed := settings.run_speed
+	var speed := settings.hunter_run_speed if role == &"hunter" else settings.run_speed
 	if controls_active:
 		var movement := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		direction = global_basis * Vector3(movement.x, 0.0, movement.y)

@@ -11,6 +11,7 @@
 ## Invariants de conception
 
 - Jeu en 3D à la première personne, à travers les yeux du personnage pour les deux rôles ; modes 1 chasseur contre 1 survivant et 2 chasseurs contre 2 survivants.
+- Un entraînement local contre IA précède désormais le multijoueur : choix survivant ou chasseur, adversaire de rôle opposé se déplaçant aléatoirement. Ne pas présenter cette promenade comme une IA qui traque ou fuit déjà le joueur.
 - Trois vies par survivant, trois emplacements d'équipement par chasseur, 30 secondes pour se cacher et quatre minutes de survie.
 - Chronomètre de combat commun à tous les joueurs, géré par le jeu. Ne pas confondre ce choix confirmé avec les règles encore proposées de reprise du chronomètre après une perte de vie.
 - Recharge par défaut du dash de déplacement : 120 secondes dès l'activation, pour les deux rôles. Recharge par défaut de la lance : 60 secondes dès l'activation. Chaque joueur et chaque arme disposent de recharges indépendantes.
