@@ -10,6 +10,8 @@ La base technique proposée est Godot avec GDScript. Les plateformes visées son
 
 Le chronomètre de combat est commun à tous les joueurs. Tous les réglages d'équilibrage doivent être faciles à modifier ; les recharges de départ sont de 120 secondes pour le dash et de 60 secondes pour la lance, avec des délais indépendants par joueur et par arme.
 
+Le prototype commence avec Joueur 1 à Joueur 4, sans comptes ni base de données. Une version suivante ajoutera les comptes, les pseudonymes, les scores sauvegardés et un classement des joueurs qui gagnent le plus, avec des vues de type top 5 ou top 200 configurables.
+
 ## Reprendre le travail
 
 Lire d'abord [la fiche de conception](GAME_DESIGN.md). Elle distingue les règles demandées, les propositions à tester et les décisions encore ouvertes. Les [consignes de reprise](AGENTS.md) permettent de conserver cette distinction pendant le développement.

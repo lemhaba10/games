@@ -30,6 +30,8 @@ La vue à la première personne, le chronomètre commun géré par le jeu et les
 | Dash de déplacement | Recharge individuelle de 120 secondes par défaut dès l'utilisation, pour les deux rôles. Cette valeur doit être facilement modifiable. |
 | Recharge des armes | Chaque arme possède son propre délai configurable. Pour la lance, la valeur de départ est de 60 secondes après utilisation. |
 | Configuration | Durées, recharges, vitesses, portées, vies et autres paramètres d'équilibrage modifiables sans changer le code des mécaniques. |
+| Joueurs au prototype | Joueur 1 et Joueur 2, puis Joueur 3 et Joueur 4 en 2 contre 2 ; comptes et base de données reportés à une version suivante. |
+| Progression future | Comptes avec pseudonymes, scores conservés en base de données et classement des joueurs qui gagnent le plus ; affichages envisagés de type top 5 ou top 200. |
 | Feintes | Les survivants peuvent faire des feintes, des glissades et d'autres mouvements d'esquive. Les chasseurs disposent de réponses à ces mouvements. |
 | Pièges | Les chasseurs peuvent déposer des objets pour bloquer un trajet ou orienter la fuite. |
 | Secrets | Des leviers cachés, activés dans le bon ordre, ouvrent une pièce secrète qui se referme. Le chasseur peut reproduire la combinaison pour entrer. Le survivant risque alors d'être coincé. |
@@ -48,6 +50,7 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 - Le **dash de déplacement se recharge en 120 secondes par défaut à partir de son activation**, pour chaque joueur. Une nouvelle activation est impossible avant l'expiration de ce délai.
 - La **charge de la lance se recharge en 60 secondes par défaut à partir de son activation**. Chaque arme possède son propre délai indépendant ; cette correction remplace l'idée précédente de deux minutes pour la lance.
 - **Toutes les valeurs d'équilibrage doivent être configurables facilement**, y compris les recharges. Les 120 secondes du dash sont une valeur de départ, pas une constante définitive : les créateurs pourront essayer 60, 30, 10 secondes ou d'autres valeurs.
+- Commencer avec **Joueur 1 à Joueur 4**, sans comptes ni base de données pour le prototype. Prévoir ensuite des comptes, pseudonymes, scores persistants et un classement fondé sur les victoires, avec des vues de type top 5 ou top 200.
 
 ## Proposition de déroulement d'une partie
 
@@ -245,6 +248,50 @@ Pour renouveler les parties : tester un nouvel équipement à la fois, ajouter d
 
 Faire revenir les joueurs par des parties satisfaisantes, des revanches rapides, des styles de jeu variés et éventuellement des récompenses cosmétiques. Le premier prototype ne nécessite ni boutique ni récompenses quotidiennes. Aucun mode d'obtention des raretés ou modèle économique n'est encore décidé.
 
+## Joueurs et sauvegardes du prototype
+
+Le premier prototype utilise des noms automatiques : **Joueur 1** et **Joueur 2** en 1 contre 1, jusqu'à **Joueur 4** en 2 contre 2. L'hôte attribue un identifiant de session distinct du nom affiché pour associer correctement chaque joueur à son personnage, son rôle et ses résultats. Ces identifiants ne sont pas des comptes permanents.
+
+Conserver en mémoire les informations de la partie et, si utile, les victoires de la session pour les revanches. Aucun compte, mot de passe, base de données ou classement mondial n'est nécessaire pour cette étape. Les résultats de test ne sont pas destinés à devenir des scores officiels.
+
+Godot fournit des outils pour écrire et relire des fichiers locaux, notamment `FileAccess`, JSON et `ConfigFile` pour les préférences. Une sauvegarde locale suffit si l'on souhaite ensuite retenir le volume, la sensibilité ou un pseudo d'essai sur l'appareil. Elle ne synchronise pas automatiquement ces informations entre plusieurs appareils. [Sauvegardes dans Godot](https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html)
+
+## Comptes et classement pour une version suivante
+
+Après validation du jeu, ajouter les comptes et une base de données partagée afin de retrouver le profil et les résultats d'un joueur au fil des sessions. Le pseudonyme est le nom public ; un identifiant permanent distinct permet de retrouver les résultats même si ce pseudonyme change.
+
+Architecture proposée : **jeu Godot → service en ligne → base de données**. Le service gère l'identification, l'enregistrement des résultats et la consultation du classement. Godot peut communiquer avec un service web via ses outils HTTP. [Requêtes HTTP dans Godot](https://docs.godotengine.org/en/stable/tutorials/networking/http_request_class.html)
+
+Le fournisseur de comptes, la technologie de base de données et l'hébergement seront choisis au moment de cette étape. Les sauvegardes locales du prototype et les futurs comptes restent deux fonctions distinctes.
+
+### Proposition de données à conserver
+
+| Données | Usage |
+| --- | --- |
+| Profil | Identifiant permanent, pseudonyme et date de création du compte |
+| Résultat de partie | Identifiant unique de partie, joueurs, équipes, rôles, mode, vainqueurs, date et version des règles |
+| Statistiques | Parties jouées, victoires, défaites et score, calculés à partir des résultats validés |
+
+Le classement public affiche le rang, le pseudonyme et le score ou le nombre de victoires. Les informations utilisées pour se connecter ne font pas partie de cet affichage.
+
+### Proposition de score et de classement
+
+- Commencer avec **une victoire = un point**, et zéro point pour une défaite. Le barème reste configurable ; aucun barème définitif n'est encore adopté.
+- En 2 contre 2, attribuer une victoire à chacun des deux joueurs de l'équipe gagnante, même si un survivant a été éliminé avant la victoire de son équipe.
+- Attribuer les points à la fin de la partie complète. Une vie perdue, une touche ou une nouvelle phase de cachette ne compte pas comme une victoire supplémentaire.
+- Classer d'abord par nombre de victoires ou par score si un barème différent est adopté. Un classement au nombre de victoires mesure aussi le volume de jeu, pas seulement le niveau.
+- Afficher un **top 5** en aperçu et permettre de consulter un **top 200**. Ces tailles sont configurables et peuvent être deux vues du même classement ; ajouter la position personnelle du joueur même s'il est en dehors du top.
+- Prévoir des classements séparés pour le 1 contre 1 et le 2 contre 2 au départ. La période retenue, le traitement des égalités et une éventuelle distinction par rôle restent à décider.
+- Un classement quotidien n'est pas encore décidé : chaque joueur possède un score, mais sa remise à zéro quotidienne, saisonnière ou son cumul permanent restent à choisir.
+
+### Proposition de validation des résultats
+
+Le futur service calcule les points à partir d'un résultat validé, plutôt que d'accepter un total de points choisi par l'application du joueur. Donner à chaque partie un identifiant unique pour qu'un même résultat reçu deux fois ne compte qu'une fois.
+
+Les parties du prototype hébergées chez un joueur restent des essais non classés. Avant un classement public, définir une source de résultats de confiance, par exemple un serveur de partie contrôlé par le projet : ajouter une base de données ne suffit pas à rendre fiables les résultats déclarés par un joueur hôte.
+
+Conserver la version des règles utilisée pour chaque résultat. Les parties de test avec des paramètres librement modifiés ne doivent pas alimenter le classement officiel. Définir également le traitement des déconnexions, abandons et parties incomplètes avant de distribuer des points publics.
+
 ## Configuration facile des règles et de l'équilibrage
 
 Les créateurs doivent pouvoir modifier les règles et l'équilibrage sans changer le code des mécaniques. Conserver les paramètres dans des ressources de configuration éditables depuis l'éditeur du moteur, avec des noms explicites et les unités affichées. Un menu de réglages destiné aux joueurs n'est pas nécessaire pour répondre à ce besoin.
@@ -255,6 +302,7 @@ Prévoir les groupes suivants :
 - **Déplacement par rôle** : course, marche, glissade, durée et puissance du dash, recharge et disponibilité initiale.
 - **Chaque arme ou équipement** : recharge indépendante, portée, durée, dégâts ou vies retirées, rayon, intensité des effets, nombre de charges et conditions d'utilisation.
 - **Carte et interactions** : durée des barricades, ouverture des portes, temps d'interaction et paramètres des secrets.
+- **Progression future** : barème de points, taille des classements, périodes et modes éligibles, lorsque les comptes seront ajoutés. Versionner le barème pour éviter de mélanger silencieusement des scores calculés avec des règles différentes.
 
 Valeurs de départ confirmées : `dash_cooldown_seconds = 120` pour les deux rôles et `spear_cooldown_seconds = 60` pour la lance. Les autres nombres de cette fiche gardent leur statut de règle demandée ou de proposition ; les rendre configurables ne change pas ce statut.
 
@@ -272,20 +320,21 @@ Proposition technique : charger et valider la configuration au début de la part
 - Mettre en œuvre la configuration centralisée décrite ci-dessus pour les règles, armes, vitesses et recharges ; calculer les échéances à partir du temps de partie de référence, indépendamment du compte à rebours affiché.
 - Utiliser des formes et décors provisoires pour tester. Garder les crédits et licences des ressources ajoutées au projet.
 
-L'hébergement Internet, les connexions entre plateformes et les comptes joueurs ne sont pas encore choisis. Le prototype local ne constituera pas une validation de ces fonctions.
+Le prototype commence avec des joueurs de session sans compte. Les comptes et le classement sont prévus pour une étape suivante ; leurs fournisseurs, l'hébergement Internet et les connexions entre plateformes ne sont pas encore choisis. Le prototype local ne constituera pas une validation de ces fonctions.
 
 ## Ordre proposé pour construire le prototype
 
 | Étape | Contenu | Résultat attendu |
 | --- | --- | --- |
 | 1 | Caméra 3D à la première personne, déplacement, collisions, petite carte | Se déplacer et se cacher derrière un mur |
-| 2 | Deux joueurs en réseau local, rôles et branche | Un joueur peut poursuivre et toucher l'autre |
+| 2 | Joueur 1 et Joueur 2 en réseau local, identifiants de session, rôles et branche | Un joueur peut poursuivre et toucher l'autre, sans compte ni base de données |
 | 3 | Vies et durées configurables, chronomètre commun, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
 | 4 | Dash configurable, glissade et premiers réglages | Tester notamment une recharge de 120, 60, 30 ou 10 secondes sans changer le code |
 | 5 | Trois emplacements et cinq équipements communs pour les chasseurs ; course murale et fumigène pour les survivants | Comparer les outils de poursuite et de fuite |
 | 6 | Quatre joueurs et réapparition individuelle | Jouer un vrai 2 contre 2 sans interrompre les autres après une touche |
 | 7 | Barricade et une pièce à leviers | Tester interception, secrets et possibilités de sortie |
 | 8 | Commandes mobiles, connexion Internet et finitions | Préparer les essais sur les appareils et réseaux visés |
+| Version suivante | Comptes, pseudonymes, base de données, résultats validés, scores et classement configurable | Retrouver sa progression et consulter les meilleurs joueurs |
 
 Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur finition arrive plus tard. Les boutiques, les raretés avancées et les cartes supplémentaires viennent après la validation de cette boucle de jeu.
 
@@ -304,6 +353,7 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - Vérifier la course murale en première personne : caméra hors des murs, fin de course, retour au sol, vulnérabilité et absence de sortie du labyrinthe.
 - Vérifier la fumée depuis les points de vue des deux rôles, à l'intérieur et à l'extérieur : chasseurs gênés, survivants voyant clairement, murs toujours opaques, règle fonctionnelle et interaction cohérente avec le tonnerre.
 - Tester deux fumigènes simultanés ou alternés, les recharges après une perte de vie et l'interdiction d'utiliser ces équipements pendant la protection.
+- Pour la future version avec comptes : vérifier qu'une partie n'attribue les points qu'une fois, que les résultats de test sont exclus, que le mode et la version du barème sont respectés, et qu'un changement de pseudo conserve les résultats du compte.
 - Après les parties, demander ce qui a été amusant ou frustrant et changer peu de valeurs à la fois.
 
 ## Décisions encore ouvertes
@@ -317,6 +367,7 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 7. Les trois emplacements des chasseurs peuvent-ils contenir uniquement des outils sans dégâts ? Les pièges occupent-ils un de ces emplacements ?
 8. Quelle direction artistique : cartoon, inquiétante, autre ? Quels ordinateurs et téléphones utiliser pour les premiers essais ?
 9. Comment obtenir les futurs équipements rares et comment présenter les résultats d'une revanche avec rôles inversés ?
+10. Pour la version avec comptes : confirmer le barème, les égalités, les périodes du classement, les règles d'abandon et la méthode de validation des résultats. Choisir ensuite le service de comptes, la base de données et l'hébergement.
 
 ## Journal des décisions
 
@@ -328,4 +379,5 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : confirmation d'un chronomètre de combat commun à tous les joueurs et géré par le jeu.
 - 11 octobre 2026 : recharge du dash de déplacement fixée à 120 secondes par défaut après activation. Après correction des créateurs, la lance possède sa propre recharge de 60 secondes, et chaque arme a un délai indépendant.
 - 11 octobre 2026 : tous les paramètres d'équilibrage doivent être faciles à configurer. Les 120 secondes du dash sont une valeur de départ qui pourra être remplacée notamment par 60, 30 ou 10 secondes pour les essais.
+- 11 octobre 2026 : commencer sans compte ni base de données avec Joueur 1 à Joueur 4 ; prévoir ensuite des comptes avec pseudonymes, scores persistants et classement des meilleurs joueurs selon les victoires, avec des vues de type top 5 ou top 200. Le barème et la période du classement restent à définir.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.
