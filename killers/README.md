@@ -25,11 +25,11 @@ L'adversaire porte une tenue orange en chasseur, turquoise en survivant. Son nom
 | ZQSD, WASD ou flèches | Se déplacer |
 | Souris | Regarder autour de soi |
 | Maj maintenue | Marcher plus lentement |
-| Clic gauche, en chasseur | Frapper avec la branche |
+| X, en chasseur | Frapper avec la branche |
 | R | Revenir au point de départ, sans récupérer de vie |
 | Échap | Ouvrir le menu et libérer la souris ; appuyer à nouveau pour reprendre |
 
-Le survivant commence avec **trois vies**. Il dispose de **30 secondes pour se cacher**, pendant lesquelles le chasseur attend et ne peut pas attaquer. En chasseur, approchez-vous du survivant, visez-le et faites un clic gauche : la branche retire une vie à portée de 1,8 m, après une préparation de 0,25 seconde. Un mur bloque le coup et le survivant peut esquiver. La recharge est de 1 seconde dès l'activation.
+Le survivant commence avec **trois vies**. Il dispose de **30 secondes pour se cacher**, pendant lesquelles le chasseur attend et ne peut pas attaquer. En chasseur, approchez-vous du survivant, visez-le et appuyez sur X : la branche retire une vie à portée de 1,8 m, après une préparation de 0,25 seconde. Un mur bloque le coup et le survivant peut esquiver. La recharge est de 1 seconde dès l'activation.
 
 Après une touche, les deux personnages sont replacés et le survivant conserve ses vies restantes ; il dispose à nouveau de 30 secondes pour se cacher. À zéro vie, l'entraînement s'arrête et propose de recommencer. Ce retour des deux personnages concerne seulement l'entraînement 1 contre 1 ; le futur 2 contre 2 conservera la réapparition individuelle. Le compte à rebours de quatre minutes n'est pas encore ajouté.
 
@@ -55,7 +55,7 @@ Vérifié localement avec Godot 4.7.2 sur Mac : import du projet, lancement sans
 
 Pour le mode IA, les contrôles valident les deux choix de rôle, les vitesses correspondantes, le contournement du mur central, la pause et le redémarrage. Une simulation déterministe de deux minutes vérifie les changements de destination et le respect du sol, des murs et des limites de l'arène. Les vues des deux rôles et les menus ont été inspectés en lancement graphique sur Mac.
 
-Les tests de combat vérifient les trois vies, le clic gauche, la préparation et la recharge, la portée, les murs, l’esquive, les phases de cachette, la pause, la fin à zéro vie, le redémarrage, les deux rôles et la configuration. Les captures graphiques permettent aussi de vérifier la branche et les indications de vie.
+Les tests de combat vérifient les trois vies, la touche X, la préparation et la recharge, la portée, les murs, l’esquive, les phases de cachette, la pause, la fin à zéro vie, le redémarrage, les deux rôles et la configuration. Les captures graphiques permettent aussi de vérifier la branche et les indications de vie.
 
 Pour reproduire les contrôles depuis le dossier `games`, avec le binaire Godot disponible sous le nom `godot` :
 

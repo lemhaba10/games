@@ -364,7 +364,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 17
 text = "ZQSD / WASD / flèches : bouger    Souris : regarder    Maj : marcher
-Clic gauche : frapper (chasseur)    R : retour    Échap : menu"
+X : frapper (chasseur)    R : retour    Échap : menu"
 
 [node name="Crosshair" type="Label" parent="HUD"]
 anchors_preset = 8
@@ -443,7 +443,7 @@ theme_override_font_sizes/font_size = 17
 text = "ZQSD / WASD / flèches    Se déplacer
 Souris                              Regarder autour de soi
 Maj                                  Marcher doucement
-Clic gauche (chasseur)      Frapper
+X (chasseur)      Frapper
 R                                      Revenir au départ
 Échap                               Libérer la souris"
 

@@ -60,7 +60,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if has_selected_role:
 			_set_active(not training_running)
 		get_viewport().set_input_as_handled()
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	elif event is InputEventKey and event.keycode == KEY_X and event.pressed and not event.echo:
 		request_player_attack()
 	elif event.is_action_pressed("reset_position") and player.controls_active:
 		player.reset_to_spawn()
@@ -191,7 +191,7 @@ func _update_hud() -> void:
 		var instruction := "Cachez-vous" if player.role == &"survivor" else "Le survivant se cache"
 		$HUD/CombatStatus.text = "%s · %d s" % [instruction, ceili(hiding_remaining)]
 	elif player.role == &"hunter":
-		$HUD/CombatStatus.text = "Branche · clic gauche pour frapper" if player_weapon.cooldown_remaining <= 0.0 else "Branche · recharge %.1f s" % player_weapon.cooldown_remaining
+		$HUD/CombatStatus.text = "Branche · X pour frapper" if player_weapon.cooldown_remaining <= 0.0 else "Branche · recharge %.1f s" % player_weapon.cooldown_remaining
 	else:
 		$HUD/CombatStatus.text = "Évitez la branche du chasseur"
 

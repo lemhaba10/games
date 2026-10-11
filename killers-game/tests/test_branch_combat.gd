@@ -60,7 +60,16 @@ func _run() -> void:
 	click.button_index = MOUSE_BUTTON_LEFT
 	click.pressed = true
 	arena._unhandled_input(click)
-	_check(arena.player_weapon.attacking, "Left click starts the branch swing")
+	_check(not arena.player_weapon.attacking, "Left click no longer attacks")
+	var attack_key := InputEventKey.new()
+	attack_key.keycode = KEY_X
+	attack_key.pressed = true
+	attack_key.echo = true
+	arena._unhandled_input(attack_key)
+	_check(not arena.player_weapon.attacking, "Key repeat does not start an attack")
+	attack_key.echo = false
+	arena._unhandled_input(attack_key)
+	_check(arena.player_weapon.attacking, "X starts the branch swing")
 	await _frames(8)
 	_check(arena.survivor_lives == 3, "Windup gives the survivor time to dodge")
 	await _frames(12)
