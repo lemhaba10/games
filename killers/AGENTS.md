@@ -10,10 +10,11 @@
 
 ## Invariants de conception
 
-- Jeu en 3D, modes 1 chasseur contre 1 survivant et 2 chasseurs contre 2 survivants.
+- Jeu en 3D à la première personne, à travers les yeux du personnage pour les deux rôles ; modes 1 chasseur contre 1 survivant et 2 chasseurs contre 2 survivants.
 - Trois vies par survivant, trois emplacements d'équipement par chasseur, 30 secondes pour se cacher et quatre minutes de survie.
 - En 2 contre 2, seul le survivant touché réapparaît ; les autres continuent. Ne pas réinitialiser toute la partie après une touche.
-- Les cinq premiers équipements proposés par les créateurs sont communs : branche, règle, seringue, lance et bâton du tonnerre.
+- Les cinq premiers équipements de chasseur proposés par les créateurs sont communs : branche, règle, seringue, lance et bâton du tonnerre.
+- Les survivants ont aussi des équipements de fuite : course sur les murs et fumigène gênant la vision des chasseurs sans aveugler les survivants. Leur nombre d'emplacements, rareté et équilibrage restent à valider.
 - Concevoir chaque pouvoir avec une possibilité de réponse. Rechercher le plaisir des deux rôles, la lisibilité et des commandes utilisables sur mobile.
 
 ## Développement

@@ -10,16 +10,17 @@ Le plaisir recherché est partagé : réussir une poursuite doit être satisfais
 
 Les sections « Règles demandées » et « Décisions confirmées » consignent les choix exprimés par les créateurs. Toutes les valeurs introduites dans les sections « Proposition » sont des réglages de départ à essayer, pas des décisions déjà approuvées.
 
-La caméra, certaines règles de chronomètre et les interactions entre pouvoirs restent à choisir. Cette fiche décrit le jeu envisagé ; elle ne décrit pas un logiciel déjà réalisé.
+La vue à la première personne est confirmée. Certaines règles de chronomètre et les interactions entre pouvoirs restent à choisir. Cette fiche décrit le jeu envisagé ; elle ne décrit pas un logiciel déjà réalisé.
 
 ## Règles demandées
 
 | Élément | Règle |
 | --- | --- |
-| Univers | Jeu en 3D dans une carte en forme de labyrinthe. |
+| Univers | Jeu en 3D dans une carte en forme de labyrinthe, vu à travers les yeux du personnage. |
 | Mode 1 contre 1 | Un chasseur contre un survivant. |
 | Mode 2 contre 2 | Deux chasseurs contre deux survivants. |
 | Équipement du chasseur | Trois armes ou outils dans son inventaire, choisis avant de jouer. |
+| Équipement du survivant | Des outils pour fuir, notamment un équipement permettant de courir sur les murs et une grenade fumigène qui gêne la vision des chasseurs sans gêner celle des survivants. Nombre d'emplacements à définir. |
 | Préparation | Le survivant dispose de 30 secondes pour se cacher. |
 | Poursuite | Le survivant doit survivre quatre minutes. |
 | Vies | Chaque survivant possède trois vies. Une touche qui inflige des dégâts retire une vie. |
@@ -36,8 +37,9 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 ## Décisions confirmées
 
 - En **2 contre 2**, lorsqu'un survivant est touché, **seul ce survivant réapparaît**. Les autres joueurs continuent à jouer : ni retour collectif au départ, ni nouvelle préparation pour tout le monde.
-- La vue doit être en 3D. Le choix entre première et troisième personne n'est pas encore arrêté.
-- Les cinq premiers équipements décrits plus bas appartiennent tous à la catégorie **commune**.
+- La vue est en 3D et **à la première personne**, à travers les yeux du personnage, pour les chasseurs comme pour les survivants.
+- Les cinq premiers équipements de chasseur décrits plus bas appartiennent tous à la catégorie **commune**.
+- Les survivants possèdent aussi des équipements de fuite : **course sur les murs** et **grenade fumigène**. La fumée gêne la vision des chasseurs, sans aveugler les survivants. Les noms définitifs, raretés et réglages de ces deux équipements restent à définir.
 
 ## Proposition de déroulement d'une partie
 
@@ -69,7 +71,7 @@ La réapparition individuelle est confirmée. Pour rendre les 30 secondes person
 
 - Le survivant perd une vie et réapparaît à un point éloigné des chasseurs, sans indication de sa position.
 - Il dispose de 30 secondes pour se recacher ; pendant cette période, il est invisible aux adversaires, impossible à toucher et sans collision avec les autres joueurs.
-- Pendant cette protection, il ne peut pas activer de mécanisme, bloquer un passage ou déclencher un piège. Les adversaires et leurs positions ne lui sont pas affichés : cette phase ne doit pas servir à espionner pour son équipe.
+- Pendant cette protection, il ne peut pas activer de mécanisme, bloquer un passage, déclencher un piège ou utiliser ses équipements de fuite. Les adversaires et leurs positions ne lui sont pas affichés : cette phase ne doit pas servir à espionner pour son équipe.
 - La fin de protection est clairement indiquée au survivant. Aucun compte à rebours public ne révèle sa position.
 - Le chronomètre commun de quatre minutes continue. Il n'est pas réinitialisé par une touche.
 - Si les deux survivants se recachent simultanément, les chasseurs peuvent se déplacer et préparer leurs pièges, mais ne détectent pas les survivants protégés.
@@ -84,13 +86,13 @@ Dans cette proposition, un survivant en train de se recacher compte encore comme
 
 Après la partie, proposer de rejouer en inversant les rôles, puis afficher les résultats des deux côtés. La revanche doit pouvoir se lancer rapidement.
 
-## Proposition de caméra et de visibilité
+## Caméra confirmée et propositions de visibilité
 
-Commencer les essais en **première personne**, avec la caméra à hauteur des yeux. Cette vue favorise les surprises et les cachettes. Une troisième personne rapprochée peut être comparée si les créateurs préfèrent voir leur personnage.
+La caméra est placée **à hauteur des yeux du personnage**, en première personne, pour les deux rôles. C'est le choix confirmé par les créateurs : le joueur voit comme s'il était lui-même dans le labyrinthe.
 
-La 3D seule ne garantit pas qu'on soit caché : les murs doivent réellement masquer les personnages, les noms ne doivent pas apparaître à travers les obstacles et aucun indicateur ne doit donner en permanence la position adverse. En troisième personne, vérifier particulièrement la possibilité de regarder derrière un angle sans exposer son personnage.
+Proposition de visibilité : les murs doivent réellement masquer les personnages, les noms ne doivent pas apparaître à travers les obstacles et aucun indicateur ne doit donner en permanence la position adverse. La caméra ne doit jamais traverser un mur, y compris pendant une glissade ou une course murale.
 
-Prévoir une sensibilité réglable, des commandes simples et des effets visuels brefs. La caméra définitive doit être essayée sur téléphone avant de concevoir toutes les animations.
+Prévoir une sensibilité réglable, des commandes simples et des effets visuels brefs. Garder l'horizon stable pendant la course murale, avec un éventuel léger mouvement de caméra désactivable. Essayer cette vue sur téléphone avant de concevoir toutes les animations.
 
 ## Proposition de vitesse et de boost
 
@@ -120,7 +122,7 @@ Afficher clairement la disponibilité du boost. Une touche distincte déclenche 
 
 Éviter d'empiler trop de boutons au début. Prototype : déplacement, caméra, boost, interaction et glissade. Ajouter le saut si la carte lui donne un vrai rôle. Donner aux chasseurs les mouvements de base nécessaires pour que les passages réservés aux survivants ne créent pas de refuges impossibles à atteindre.
 
-## Équipements communs demandés
+## Équipements communs des chasseurs demandés
 
 Les comportements de la deuxième colonne viennent des créateurs. Les dégâts, durées et recharges de la troisième colonne sont des **propositions de prototype**.
 
@@ -141,8 +143,40 @@ Les comportements de la deuxième colonne viennent des créateurs. Les dégâts,
 - La lance ne traverse pas les murs et ne se cumule pas avec un boost. Une charge touche au maximum un survivant et s'arrête à l'impact.
 - Tous les coups et pouvoirs offensifs sont bloqués par les murs, à l'exception explicite de la mesure de distance de la règle.
 - Changer d'équipement prend 0,35 seconde et n'annule aucune recharge. Les outils non sélectionnés continuent à se recharger.
-- Proposer au moins une arme à dégâts dans chaque inventaire. Il reste à décider si cette condition doit être obligatoire ou s'il existe une attaque de base indépendante.
+- Proposer au moins une arme à dégâts dans chaque inventaire de chasseur. Il reste à décider si cette condition doit être obligatoire ou s'il existe une attaque de base indépendante.
 - Le tir a été évoqué pour illustrer une touche, mais aucune arme à feu précise n'a encore été choisie.
+
+## Équipements de fuite des survivants
+
+Les survivants peuvent utiliser des équipements pour échapper aux chasseurs. Les deux premiers effets demandés sont la course sur les murs et la fumée qui gêne uniquement la vision des chasseurs. Leur fonction de fuite est confirmée ; les paramètres ci-dessous sont des **propositions à tester**.
+
+Proposition d'inventaire initial : deux emplacements, un pour chaque équipement, disponibles dès le début de la poursuite. Les trois emplacements confirmés des chasseurs ne déterminent pas le nombre d'emplacements des survivants. Ces outils n'infligent pas de dégâts dans le prototype proposé.
+
+| Équipement au nom provisoire | Effet demandé | Réglage initial proposé | Réponse possible du chasseur |
+| --- | --- | --- | --- |
+| Bottes de course murale | Courir sur un mur pour fuir | Course horizontale jusqu'à 2 secondes à 6 m/s, recharge de 18 secondes après la fin de l'action | Anticiper le point de retour au sol, emprunter un autre passage ou toucher le survivant pendant la course |
+| Grenade fumigène | Créer de la fumée qui aveugle le chasseur sans aveugler le survivant | Lancer jusqu'à 8 m, nuage de 4 m de rayon pendant 4 secondes, une charge, recharge de 25 secondes à partir du lancer | Contourner le nuage, écouter les pas ou utiliser la règle pour estimer la distance |
+
+### Proposition de fonctionnement de la course murale
+
+- Activer l'équipement à proximité d'un mur compatible en avançant le long de celui-ci. Prévoir une commande explicite utilisable au clavier et sur écran tactile.
+- Courir horizontalement, sans escalade verticale ni montée sur le sommet du labyrinthe. Prévoir des surfaces lisibles et un retour au sol accessible aux deux rôles.
+- La course se termine à la fin du mur, après 2 secondes ou si le joueur relâche l'action. Une nouvelle activation exige un retour au sol et une recharge terminée : pas d'enchaînement infini entre deux murs.
+- Le survivant reste vulnérable. Une touche interrompt l'action et applique la perte de vie habituelle. Les murs et les barricades conservent leurs collisions.
+- Ne pas cumuler la vitesse de course murale avec le boost. Le ralentissement de la seringue s'applique aussi à cette vitesse ; l'inversion des directions reste active sans inverser la caméra.
+- Un trajet mural doit aider à esquiver ou contourner un obstacle sans conduire hors de la carte ou vers une cachette définitivement inaccessible aux chasseurs.
+
+### Proposition de fonctionnement de la fumée
+
+- Pour les chasseurs, le nuage masque les personnages et le décor derrière lui ou à l'intérieur. Il gêne aussi un chasseur qui regarde à travers depuis l'extérieur ; il ne provoque pas d'aveuglement à distance ailleurs dans la carte.
+- Pour les survivants, afficher une limite ou une brume légère non occultante afin qu'ils sachent où se trouve le nuage tout en gardant une vision claire. En 2 contre 2, cela s'applique aussi au survivant allié. Les murs restent opaques pour tous.
+- Le nuage ne traverse pas les murs et ne se propage pas dans une pièce fermée adjacente. Son rayon maximal est limité par le décor.
+- La fumée ne rend pas invincible et ne bloque ni les déplacements ni les attaques. Elle ne supprime pas le bruit des pas ni la détection de la règle.
+- Dans le prototype proposé, le tonnerre exige une cible visible : la fumée peut donc empêcher son déclenchement sur un survivant masqué, mais n'annule pas un aveuglement déjà appliqué.
+- Le lancer et l'apparition du nuage produisent un son local. Deux nuages superposés ne renforcent pas l'aveuglement ; chacun conserve sa durée propre.
+- La recharge ne se réinitialise pas à la perte d'une vie. Interdire l'utilisation des deux équipements pendant les phases protégées de cachette, initiales ou après réapparition.
+
+Tester particulièrement les fumigènes alternés de deux survivants : ils doivent permettre une évasion sans maintenir un couloir sous une fumée permanente. Les durées, rayons et recharges restent ajustables après les premières parties.
 
 ## Proposition de labyrinthe et de pièges
 
@@ -183,7 +217,7 @@ La pièce ne protège ni de la règle ni des attaques une fois la porte ouverte.
 
 ## Proposition de raretés et de renouvellement
 
-Conserver les cinq équipements initiaux en commun. Introduire les autres raretés lorsque la poursuite de base est déjà amusante.
+Conserver les cinq équipements initiaux des chasseurs en commun. La rareté des équipements de survivant reste à choisir. Introduire les autres raretés lorsque la poursuite de base est déjà amusante.
 
 Une rareté plus élevée peut apporter une mécanique plus particulière, une apparence ou une difficulté d'utilisation différente. Éviter qu'elle assure simplement la victoire grâce à des dégâts ou à une vitesse supérieurs.
 
@@ -207,11 +241,11 @@ L'hébergement Internet, les connexions entre plateformes et les comptes joueurs
 
 | Étape | Contenu | Résultat attendu |
 | --- | --- | --- |
-| 1 | Caméra 3D, déplacement, collisions, petite carte | Se déplacer et se cacher derrière un mur |
+| 1 | Caméra 3D à la première personne, déplacement, collisions, petite carte | Se déplacer et se cacher derrière un mur |
 | 2 | Deux joueurs en réseau local, rôles et branche | Un joueur peut poursuivre et toucher l'autre |
 | 3 | Trois vies, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
 | 4 | Boost, glissade et premiers réglages | Chaque rôle dispose d'actions intéressantes pendant une poursuite |
-| 5 | Trois emplacements et cinq équipements communs | Comparer plusieurs façons de jouer |
+| 5 | Trois emplacements et cinq équipements communs pour les chasseurs ; course murale et fumigène pour les survivants | Comparer les outils de poursuite et de fuite |
 | 6 | Quatre joueurs et réapparition individuelle | Jouer un vrai 2 contre 2 sans interrompre les autres après une touche |
 | 7 | Barricade et une pièce à leviers | Tester interception, secrets et possibilités de sortie |
 | 8 | Commandes mobiles, connexion Internet et finitions | Préparer les essais sur les appareils et réseaux visés |
@@ -227,17 +261,20 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - Tester la règle à moins de 30 m, exactement à 30 m et au-delà ; vérifier le rayon de 15 m et les murs pour le tonnerre.
 - Essayer de bloquer tous les trajets avec les pièges et de rester indéfiniment dans la pièce secrète ; corriger toute stratégie qui supprime les possibilités de réponse.
 - Tester les commandes inversées, le boost et la glissade au clavier comme au tactile.
+- Vérifier la course murale en première personne : caméra hors des murs, fin de course, retour au sol, vulnérabilité et absence de sortie du labyrinthe.
+- Vérifier la fumée depuis les points de vue des deux rôles, à l'intérieur et à l'extérieur : chasseurs gênés, survivants voyant clairement, murs toujours opaques, règle fonctionnelle et interaction cohérente avec le tonnerre.
+- Tester deux fumigènes simultanés ou alternés, les recharges après une perte de vie et l'interdiction d'utiliser ces équipements pendant la protection.
 - Après les parties, demander ce qui a été amusant ou frustrant et changer peu de valeurs à la fois.
 
 ## Décisions encore ouvertes
 
-1. Première personne ou troisième personne rapprochée ?
+1. Valider le nombre d'emplacements des survivants, les noms et raretés de leurs équipements, ainsi que les réglages de course murale et de fumée.
 2. Confirmer Godot et GDScript pour réaliser le prototype.
 3. En 1 contre 1, les quatre minutes recommencent-elles après chaque vie perdue ?
 4. En 2 contre 2, valider le chronomètre continu, la protection personnelle de 30 secondes et la victoire possible pendant cette protection.
 5. La seringue et le tonnerre retirent-ils aussi une vie, ou appliquent-ils seulement leur effet ?
 6. Le bâton du tonnerre affecte-t-il tous les adversaires visibles à portée ou une seule cible ?
-7. Les trois emplacements peuvent-ils contenir uniquement des outils sans dégâts ? Les pièges occupent-ils un de ces emplacements ?
+7. Les trois emplacements des chasseurs peuvent-ils contenir uniquement des outils sans dégâts ? Les pièges occupent-ils un de ces emplacements ?
 8. Quelle direction artistique : cartoon, inquiétante, autre ? Quels ordinateurs et téléphones utiliser pour les premiers essais ?
 9. Comment obtenir les futurs équipements rares et comment présenter les résultats d'une revanche avec rôles inversés ?
 
@@ -246,4 +283,6 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : définition initiale par les créateurs des modes 1 contre 1 et 2 contre 2, du jeu en 3D, des trois vies, des boosts, du labyrinthe, des pièges, des secrets, des cinq équipements communs et des futures raretés.
 - 11 octobre 2026 : confirmation explicite qu'en 2 contre 2, seul le survivant touché réapparaît et que les autres continuent.
 - 11 octobre 2026 : le dossier `games` est la racine du dépôt `git@github.com:lemhaba10/games.git` ; le jeu réside dans `killers`.
+- 11 octobre 2026 : confirmation de la vue à la première personne, à travers les yeux du personnage.
+- 11 octobre 2026 : ajout demandé d'équipements de fuite pour les survivants, avec course sur les murs et grenade fumigène gênant les chasseurs sans aveugler les survivants. Leurs valeurs d'équilibrage et leur rareté ne sont pas encore validées.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.
