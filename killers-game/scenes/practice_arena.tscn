@@ -309,13 +309,52 @@ offset_bottom = 90.0
 theme_override_font_sizes/font_size = 16
 text = "Choisissez votre rôle"
 
+[node name="Lives" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+horizontal_alignment = 2
+text = "Vies du survivant : 3 / 3"
+
+[node name="CombatStatus" type="Label" parent="HUD"]
+offset_left = 30.0
+offset_top = 90.0
+offset_right = 650.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+
+[node name="Feedback" type="Label" parent="HUD"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -115.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+
 [node name="Help" type="Label" parent="HUD"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 28.0
-offset_top = -46.0
+offset_top = -65.0
 offset_right = -28.0
 offset_bottom = -18.0
 grow_horizontal = 2
@@ -324,7 +363,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 17
-text = "ZQSD / WASD / flèches : bouger     Souris : regarder     Maj : marcher     R : retour     Échap : menu"
+text = "ZQSD / WASD / flèches : bouger    Souris : regarder    Maj : marcher
+Clic gauche : frapper (chasseur)    R : retour    Échap : menu"
 
 [node name="Crosshair" type="Label" parent="HUD"]
 anchors_preset = 8
@@ -394,8 +434,8 @@ text = "Choisissez votre rôle"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.82, 0.85, 1)
 theme_override_font_sizes/font_size = 18
-text = "Votre adversaire prend le rôle opposé.
-Il se déplace au hasard dans le labyrinthe."
+text = "Testez la branche et les vies du survivant.
+Cachez-vous, puis évitez les coups."
 
 [node name="Controls" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
 layout_mode = 2
@@ -403,6 +443,7 @@ theme_override_font_sizes/font_size = 17
 text = "ZQSD / WASD / flèches    Se déplacer
 Souris                              Regarder autour de soi
 Maj                                  Marcher doucement
+Clic gauche (chasseur)      Frapper
 R                                      Revenir au départ
 Échap                               Libérer la souris"
 

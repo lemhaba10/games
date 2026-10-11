@@ -23,6 +23,8 @@ func _check(condition: bool, description: String) -> void:
 
 func _run() -> void:
 	var arena = load("res://scenes/practice_arena.tscn").instantiate()
+	arena.combat_settings = arena.combat_settings.duplicate()
+	arena.combat_settings.hiding_seconds = 0.0
 	root.add_child(arena)
 	current_scene = arena
 	var player = arena.get_node("Player")
@@ -34,6 +36,7 @@ func _run() -> void:
 	arena.start_training(&"survivor")
 	# Isoler les tests du contrôleur des collisions avec le personnage mobile.
 	arena.bot.set_active(false)
+	arena.bot.set_physics_process(false)
 	arena.bot.collision_layer = 0
 	Input.action_press("move_forward")
 	await _frames(60)

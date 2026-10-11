@@ -22,6 +22,8 @@ func _check(condition: bool, description: String) -> void:
 
 func _run() -> void:
 	var arena = load("res://scenes/practice_arena.tscn").instantiate()
+	arena.combat_settings = arena.combat_settings.duplicate()
+	arena.combat_settings.hiding_seconds = 0.0
 	root.add_child(arena)
 	current_scene = arena
 	await _frames(30)

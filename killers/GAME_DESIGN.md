@@ -10,7 +10,7 @@ Le plaisir recherché est partagé : réussir une poursuite doit être satisfais
 
 Les sections « Règles demandées » et « Décisions confirmées » consignent les choix exprimés par les créateurs. Toutes les valeurs introduites dans les sections « Proposition » sont des réglages de départ à essayer, pas des décisions déjà approuvées.
 
-La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu visé ; le prototype actuel permet un entraînement local contre un personnage aux déplacements aléatoires.
+La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu visé ; le prototype actuel permet un entraînement local contre un personnage aux déplacements aléatoires, avec branche, vies et phases de cachette.
 
 ## Règles demandées
 
@@ -54,16 +54,21 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 - Commencer avec **Joueur 1 à Joueur 4**, sans comptes ni base de données pour le prototype. Prévoir ensuite des comptes, pseudonymes, scores persistants et un classement fondé sur les victoires, avec des vues de type top 5 ou top 200.
 - Le projet Godot créé par les créateurs se trouve dans **`games/killers-game`**. La documentation reste dans **`games/killers`**, et le dépôt Git commun est **`games`**.
 - Ajouter d'abord un **mode local contre IA**, avec choix du rôle et déplacements aléatoires de l'adversaire, pour tester la poursuite avant de poursuivre les fonctionnalités multijoueurs.
+- Ajouter les vies du survivant et l’attaque du chasseur avec la première arme : la branche.
 
 ## Entraînement contre IA actuellement disponible
 
 Au lancement, choisir Survivant ou Chasseur. Le personnage contrôlé par le jeu reçoit le rôle opposé, un corps visible et une couleur de tenue : orange pour le chasseur, turquoise pour le survivant. Son nom ne traverse pas les murs.
 
-L'IA choisit au hasard des destinations accessibles et suit des chemins qui contournent les obstacles de l'arène. Ce comportement est identique dans les deux rôles : la détection, la recherche active du joueur et les décisions de fuite ne sont pas encore implémentées. Les armes, dégâts, vies et chronomètres de combat ne font pas encore partie de cet entraînement.
+L'IA choisit au hasard des destinations accessibles et suit des chemins qui contournent les obstacles de l'arène. Ce comportement est identique dans les deux rôles : la recherche active du joueur et les décisions de fuite ne sont pas encore implémentées. Le chasseur IA détecte toutefois le survivant à portée de branche, se tourne vers lui et prépare un coup ; les murs bloquent cette détection et les dégâts.
 
-Échap ou la perte de focus met les deux personnages en pause. Le menu permet de reprendre, de recommencer ou de changer de rôle. Le redémarrage replace les deux personnages ; la touche R replace seulement le joueur.
+Le survivant possède trois vies affichées à l’écran. Le chasseur humain utilise le clic gauche pour frapper avec une branche visible et animée. La portée de 1,8 m, la préparation de 0,25 seconde, la recharge de 1 seconde dès l’activation et la tolérance de visée de 35° de chaque côté sont des réglages de prototype. Une touche retire une vie ; sortir de portée ou de la zone visée pendant la préparation évite les dégâts.
 
-Les réglages initiaux reprennent les propositions de vitesse : 5 m/s pour un survivant et 5,2 m/s pour un chasseur. Les vitesses sont partagées entre joueur et IA dans `config/player_settings.tres`. Un multiplicateur de vitesse propre à l'IA, les pauses entre destinations, la distance minimale visée et le délai de récupération après blocage sont modifiables dans `config/ai_settings.tres`. Ces valeurs restent des réglages d'essai.
+Les 30 secondes de cachette s’appliquent au début et après chaque vie perdue. Le chasseur reste immobile et ne peut pas attaquer. Le survivant IA est masqué pendant cette phase lorsqu’on joue chasseur. Pour cet entraînement 1 contre 1, le prototype applique le retour des deux personnages proposé plus bas, en conservant les vies restantes. Cette implémentation ne change pas la règle confirmée de réapparition individuelle en 2 contre 2. À zéro vie, l’entraînement s’arrête avec un écran de résultat. Le chronomètre de poursuite de quatre minutes et la victoire du survivant au temps écoulé restent à ajouter.
+
+Échap ou la perte de focus met les deux personnages en pause. Le menu permet de reprendre, de recommencer ou de changer de rôle. Les délais de cachette, de préparation et de recharge sont aussi suspendus. Le redémarrage replace les deux personnages et restaure les vies ; la touche R replace seulement le joueur, sans rendre de vie, et reste bloquée pour le chasseur pendant la cachette.
+
+Les réglages initiaux reprennent les propositions de vitesse : 5 m/s pour un survivant et 5,2 m/s pour un chasseur. Les vitesses sont partagées entre joueur et IA dans `config/player_settings.tres`. Un multiplicateur de vitesse propre à l'IA, les pauses entre destinations, la distance minimale visée et le délai de récupération après blocage sont modifiables dans `config/ai_settings.tres`. Ces valeurs restent des réglages d'essai. Les vies, la durée de cachette et les paramètres de la branche se modifient dans `config/combat_settings.tres`, commun au joueur et à l’IA.
 
 ## Proposition de déroulement d'une partie
 
@@ -341,6 +346,7 @@ Le prototype commence avec des joueurs de session sans compte. Les comptes et le
 | --- | --- | --- |
 | 1 réalisée | Caméra 3D à la première personne, déplacement, collisions, petite carte | Exploration solo disponible ; lancement et contrôles locaux validés sur Mac |
 | Entraînement IA réalisé | Choix du rôle, adversaire visible et déplacements aléatoires autour des murs | Tester une poursuite locale ; les deux rôles, la navigation et la pause sont validés sur Mac |
+| Combat local réalisé | Branche, trois vies, cachette de 30 secondes, fin à zéro vie et réglages configurables | Tester les coups et les esquives dans les deux rôles ; contrôles automatisés et affichage validés sur Mac |
 | 2 | Joueur 1 et Joueur 2 en réseau local, identifiants de session, rôles et branche | Un joueur peut poursuivre et toucher l'autre, sans compte ni base de données |
 | 3 | Vies et durées configurables, chronomètre commun, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
 | 4 | Dash configurable, glissade et premiers réglages | Tester notamment une recharge de 120, 60, 30 ou 10 secondes sans changer le code |
@@ -396,4 +402,5 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : les créateurs initialisent le projet Godot dans `games/killers-game`, l'éditeur ayant demandé un dossier vide. Conserver ce dossier pour le jeu et `games/killers` pour la documentation ; le projet existant utilise Godot 4.7 avec le rendu Compatibility.
 - 11 octobre 2026 : réalisation demandée de la première étape. Ajout d'une arène d'exploration solo, du déplacement à la première personne, de collisions et de réglages modifiables dans l'inspecteur. Validation locale sous Godot 4.7.2 sur Mac ; l'équilibrage en poursuite, le multijoueur et les appareils mobiles restent à tester lors des étapes suivantes.
 - 11 octobre 2026 : ajout demandé et réalisé d'un entraînement contre IA avec choix survivant ou chasseur, personnage opposé visible et déplacements aléatoires. Tests locaux des deux rôles, du contournement des murs et de la pause ; validation visuelle sur Mac. L'IA ne traque ni ne fuit encore activement le joueur.
+- 11 octobre 2026 : ajout demandé et réalisé des vies du survivant et de l’attaque à la branche. Le prototype local utilise trois vies, un clic gauche pour frapper, les 30 secondes de cachette au début et après une touche, et une fin à zéro vie. Le chasseur IA attaque à portée sans poursuivre activement. Paramètres dans `config/combat_settings.tres` ; tests locaux et inspection graphique sur Mac. La poursuite de quatre minutes reste à réaliser.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.
