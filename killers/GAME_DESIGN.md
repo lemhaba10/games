@@ -10,7 +10,7 @@ Le plaisir recherché est partagé : réussir une poursuite doit être satisfais
 
 Les sections « Règles demandées » et « Décisions confirmées » consignent les choix exprimés par les créateurs. Toutes les valeurs introduites dans les sections « Proposition » sont des réglages de départ à essayer, pas des décisions déjà approuvées.
 
-La vue à la première personne est confirmée. Certaines règles de chronomètre et les interactions entre pouvoirs restent à choisir. Cette fiche décrit le jeu envisagé ; elle ne décrit pas un logiciel déjà réalisé.
+La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu envisagé ; elle ne décrit pas un logiciel déjà réalisé.
 
 ## Règles demandées
 
@@ -23,9 +23,13 @@ La vue à la première personne est confirmée. Certaines règles de chronomètr
 | Équipement du survivant | Des outils pour fuir, notamment un équipement permettant de courir sur les murs et une grenade fumigène qui gêne la vision des chasseurs sans gêner celle des survivants. Nombre d'emplacements à définir. |
 | Préparation | Le survivant dispose de 30 secondes pour se cacher. |
 | Poursuite | Le survivant doit survivre quatre minutes. |
+| Chronomètre | Un chronomètre de combat commun à tous les joueurs, géré par le jeu selon les réglages des créateurs. |
 | Vies | Chaque survivant possède trois vies. Une touche qui inflige des dégâts retire une vie. |
 | Après une touche | S'il lui reste des vies, le survivant bénéficie à nouveau de 30 secondes pour se cacher. |
 | Mobilité | Vitesses équilibrées entre les rôles et accélérations temporaires disponibles après un délai. |
+| Dash de déplacement | Recharge individuelle de 120 secondes par défaut dès l'utilisation, pour les deux rôles. Cette valeur doit être facilement modifiable. |
+| Recharge des armes | Chaque arme possède son propre délai configurable. Pour la lance, la valeur de départ est de 60 secondes après utilisation. |
+| Configuration | Durées, recharges, vitesses, portées, vies et autres paramètres d'équilibrage modifiables sans changer le code des mécaniques. |
 | Feintes | Les survivants peuvent faire des feintes, des glissades et d'autres mouvements d'esquive. Les chasseurs disposent de réponses à ces mouvements. |
 | Pièges | Les chasseurs peuvent déposer des objets pour bloquer un trajet ou orienter la fuite. |
 | Secrets | Des leviers cachés, activés dans le bon ordre, ouvrent une pièce secrète qui se referme. Le chasseur peut reproduire la combinaison pour entrer. Le survivant risque alors d'être coincé. |
@@ -40,6 +44,10 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 - La vue est en 3D et **à la première personne**, à travers les yeux du personnage, pour les chasseurs comme pour les survivants.
 - Les cinq premiers équipements de chasseur décrits plus bas appartiennent tous à la catégorie **commune**.
 - Les survivants possèdent aussi des équipements de fuite : **course sur les murs** et **grenade fumigène**. La fumée gêne la vision des chasseurs, sans aveugler les survivants. Les noms définitifs, raretés et réglages de ces deux équipements restent à définir.
+- Le **chronomètre de combat est commun à tous les joueurs** et géré par le jeu. Les créateurs en définissent les réglages.
+- Le **dash de déplacement se recharge en 120 secondes par défaut à partir de son activation**, pour chaque joueur. Une nouvelle activation est impossible avant l'expiration de ce délai.
+- La **charge de la lance se recharge en 60 secondes par défaut à partir de son activation**. Chaque arme possède son propre délai indépendant ; cette correction remplace l'idée précédente de deux minutes pour la lance.
+- **Toutes les valeurs d'équilibrage doivent être configurables facilement**, y compris les recharges. Les 120 secondes du dash sont une valeur de départ, pas une constante définitive : les créateurs pourront essayer 60, 30, 10 secondes ou d'autres valeurs.
 
 ## Proposition de déroulement d'une partie
 
@@ -50,6 +58,16 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 3. Chaque survivant commence avec trois vies.
 4. Pendant 30 secondes, les survivants explorent et se cachent. Les chasseurs restent dans une zone de départ qui ne permet pas de voir où ils partent.
 5. Le chronomètre de quatre minutes démarre à la libération des chasseurs.
+
+### Chronomètre commun et recharges individuelles
+
+Tous les joueurs voient le même temps de combat restant. Le jeu pilote ce chronomètre à partir d'une référence de temps commune ; chaque appareil affiche cet état sans décider indépendamment du début ou de la fin de la partie.
+
+Les 30 secondes pour se cacher constituent une phase distincte du temps de combat. En 2 contre 2, le compte à rebours personnel d'un survivant qui se recache ne remplace pas le chronomètre commun affiché aux autres.
+
+Chaque joueur possède ses propres recharges : le dash d'un joueur ne consomme pas celui d'un autre. Chaque arme possède aussi son propre délai. Utiliser la lance déclenche sa recharge de 60 secondes, sans déclencher la recharge de 120 secondes du dash de déplacement ; l'interdiction proposée de les activer simultanément reste applicable.
+
+Le caractère commun du chronomètre est confirmé. Son éventuelle remise à zéro après une perte de vie en 1 contre 1, et sa continuité en 2 contre 2, restent décrites ci-dessous comme des propositions à valider.
 
 ### Touche et perte de vie
 
@@ -94,21 +112,23 @@ Proposition de visibilité : les murs doivent réellement masquer les personnage
 
 Prévoir une sensibilité réglable, des commandes simples et des effets visuels brefs. Garder l'horizon stable pendant la course murale, avec un éventuel léger mouvement de caméra désactivable. Essayer cette vue sur téléphone avant de concevoir toutes les animations.
 
-## Proposition de vitesse et de boost
+## Dash configurable et propositions de vitesse
 
-Les distances et vitesses ci-dessous supposent que l'échelle de la carte est réglée en mètres.
+Le « boost » mentionné dans la fiche désigne le **dash de déplacement** commun aux deux rôles. Sa recharge de **120 secondes à partir de l'activation** est la valeur par défaut confirmée. La durée de l'accélération, sa puissance et sa disponibilité au début de la poursuite restent des propositions. Les distances et vitesses ci-dessous supposent que l'échelle de la carte est réglée en mètres.
 
 | Action | Survivant | Chasseur |
 | --- | --- | --- |
 | Course normale | 5 m/s | 5,2 m/s |
 | Marche discrète | 2,5 m/s | 2,5 m/s |
 | Boost | Vitesse multipliée par 1,4 pendant 1 seconde | Vitesse multipliée par 1,4 pendant 1 seconde |
-| Recharge du boost | 12 secondes après la fin du boost | 12 secondes après la fin du boost |
+| Recharge du dash, valeur par défaut confirmée | 120 secondes à partir de l'activation | 120 secondes à partir de l'activation |
 | Charges disponibles | Une, prête au début de la poursuite | Une, prête au début de la poursuite |
 
-Le léger avantage de course du chasseur met la pression dans une ligne droite. Le survivant gagne du terrain en choisissant mieux son trajet, en glissant et en feintant. Ces nombres servent uniquement à commencer les essais : les dimensions de la carte et les équipements changeront fortement l'équilibre.
+Le léger avantage de course proposé pour le chasseur met la pression dans une ligne droite. Le survivant gagne du terrain en choisissant mieux son trajet, en glissant et en feintant. Les valeurs proposées de vitesse servent à commencer les essais ; la recharge confirmée reste elle aussi configurable pour l'équilibrage.
 
-Afficher clairement la disponibilité du boost. Une touche distincte déclenche l'accélération ; courir normalement ne consomme pas de ressource au premier prototype. En 2 contre 2, les recharges continuent normalement lors d'une réapparition individuelle, sans rendre artificiellement des charges.
+Afficher clairement la disponibilité du dash et son délai restant. Par exemple, avec le réglage par défaut, un dash activé à 00:20 du temps écoulé redevient disponible à 02:20, si la partie continue. La recharge commence dès l'activation, pas à la fin de l'accélération.
+
+Proposition : une touche distincte déclenche l'accélération ; courir normalement ne consomme pas de ressource. En 2 contre 2, les recharges continuent lors d'une réapparition individuelle, sans rendre artificiellement des charges. Une éventuelle remise à zéro du chronomètre affiché ne doit pas effacer les recharges en cours.
 
 ## Proposition de feintes et de réponses
 
@@ -124,14 +144,14 @@ Afficher clairement la disponibilité du boost. Une touche distincte déclenche 
 
 ## Équipements communs des chasseurs demandés
 
-Les comportements de la deuxième colonne viennent des créateurs. Les dégâts, durées et recharges de la troisième colonne sont des **propositions de prototype**.
+Les comportements de la deuxième colonne viennent des créateurs. Les dégâts, durées et recharges de la troisième colonne sont des **propositions de prototype**, sauf la recharge de la lance : **60 secondes par défaut**, confirmées par les créateurs. Toutes ces valeurs sont configurables.
 
 | Équipement | Effet demandé | Réglage initial proposé | Possibilité de réponse |
 | --- | --- | --- | --- |
 | Branche | Arme simple, sans pouvoir spécial | Corps à corps, portée de 1,8 m, retire une vie, préparation de 0,25 seconde, délai de 1 seconde entre attaques | Sortir de portée ou faire manquer le coup |
 | Règle | Affiche la distance de l'ennemi jusqu'à 30 m ; ne détecte rien au-delà | À l'activation, indique pendant 2 secondes la distance arrondie du survivant actif le plus proche ; recharge de 8 secondes ; aucun dégât | Changer de trajet entre deux mesures ; aucun nom ni direction révélé |
 | Seringue | Au corps à corps, inverse les commandes et réduit la vitesse de 50 % | Portée de 1,5 m, effet de 2 secondes, recharge de 15 secondes ; ne retire pas de vie dans cette première proposition | Éviter la portée courte et exploiter le délai après une attaque manquée |
-| Lance | Permet une ruée vers l'ennemi | Charge dans la direction visée, jusqu'à 6 m en 0,35 seconde ; retire une vie au contact ; recharge de 10 secondes ; s'arrête contre un mur | Esquiver latéralement pendant le bref signal de préparation |
+| Lance | Permet une ruée vers l'ennemi | Charge dans la direction visée, jusqu'à 6 m en 0,35 seconde ; retire une vie au contact ; recharge confirmée de 60 secondes par défaut dès l'activation ; s'arrête contre un mur | Esquiver latéralement pendant le bref signal de préparation |
 | Bâton du tonnerre | Aveugle un ennemi avec un éclair dans un rayon de 15 m | Affecte les survivants visibles à 15 m maximum ; gêne visuelle de 1 seconde ; recharge de 18 secondes ; aucun dégât | Se mettre derrière un mur pendant l'annonce de 0,4 seconde |
 
 ### Proposition d'interactions entre équipements
@@ -225,6 +245,23 @@ Pour renouveler les parties : tester un nouvel équipement à la fois, ajouter d
 
 Faire revenir les joueurs par des parties satisfaisantes, des revanches rapides, des styles de jeu variés et éventuellement des récompenses cosmétiques. Le premier prototype ne nécessite ni boutique ni récompenses quotidiennes. Aucun mode d'obtention des raretés ou modèle économique n'est encore décidé.
 
+## Configuration facile des règles et de l'équilibrage
+
+Les créateurs doivent pouvoir modifier les règles et l'équilibrage sans changer le code des mécaniques. Conserver les paramètres dans des ressources de configuration éditables depuis l'éditeur du moteur, avec des noms explicites et les unités affichées. Un menu de réglages destiné aux joueurs n'est pas nécessaire pour répondre à ce besoin.
+
+Prévoir les groupes suivants :
+
+- **Partie** : durée de préparation, durée de combat, nombre de vies et règles de reprise après une touche, avec des réglages par mode si nécessaire.
+- **Déplacement par rôle** : course, marche, glissade, durée et puissance du dash, recharge et disponibilité initiale.
+- **Chaque arme ou équipement** : recharge indépendante, portée, durée, dégâts ou vies retirées, rayon, intensité des effets, nombre de charges et conditions d'utilisation.
+- **Carte et interactions** : durée des barricades, ouverture des portes, temps d'interaction et paramètres des secrets.
+
+Valeurs de départ confirmées : `dash_cooldown_seconds = 120` pour les deux rôles et `spear_cooldown_seconds = 60` pour la lance. Les autres nombres de cette fiche gardent leur statut de règle demandée ou de proposition ; les rendre configurables ne change pas ce statut.
+
+Pour comparer un dash toutes les deux minutes, toutes les minutes, toutes les 30 secondes ou toutes les 10 secondes, modifier uniquement son réglage. L'affichage de la recharge, la validation réseau et le comportement effectif doivent tous lire cette même valeur, sans copies de nombres dispersées dans le code.
+
+Proposition technique : charger et valider la configuration au début de la partie, puis la partager avec tous les appareils. Utiliser la configuration de l'hôte ou du serveur comme référence. Appliquer les modifications aux parties suivantes pour conserver des règles identiques entre joueurs pendant une partie en cours. Garder les valeurs par défaut dans le dépôt pour pouvoir revenir facilement à un réglage connu.
+
 ## Proposition de base technique
 
 - Moteur : Godot, avec GDScript ; choix proposé lors de la première discussion, à confirmer avant installation et création du projet.
@@ -232,7 +269,7 @@ Faire revenir les joueurs par des parties satisfaisantes, des revanches rapides,
 - Distribution visée : version ordinateur, puis Steam, Android et iOS. Steam est une boutique pour la version ordinateur.
 - Multijoueur : d'abord deux instances, puis deux appareils sur un réseau local ; préparer ensuite les connexions sur Internet.
 - L'hôte de la partie valide les touches, les vies, les chronomètres et les pouvoirs. Chaque appareil ne doit pas décider seul qu'il a touché quelqu'un.
-- Conserver les valeurs d'armes, de vitesse et de recharge dans des données faciles à modifier.
+- Mettre en œuvre la configuration centralisée décrite ci-dessus pour les règles, armes, vitesses et recharges ; calculer les échéances à partir du temps de partie de référence, indépendamment du compte à rebours affiché.
 - Utiliser des formes et décors provisoires pour tester. Garder les crédits et licences des ressources ajoutées au projet.
 
 L'hébergement Internet, les connexions entre plateformes et les comptes joueurs ne sont pas encore choisis. Le prototype local ne constituera pas une validation de ces fonctions.
@@ -243,8 +280,8 @@ L'hébergement Internet, les connexions entre plateformes et les comptes joueurs
 | --- | --- | --- |
 | 1 | Caméra 3D à la première personne, déplacement, collisions, petite carte | Se déplacer et se cacher derrière un mur |
 | 2 | Deux joueurs en réseau local, rôles et branche | Un joueur peut poursuivre et toucher l'autre |
-| 3 | Trois vies, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
-| 4 | Boost, glissade et premiers réglages | Chaque rôle dispose d'actions intéressantes pendant une poursuite |
+| 3 | Vies et durées configurables, chronomètre commun, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
+| 4 | Dash configurable, glissade et premiers réglages | Tester notamment une recharge de 120, 60, 30 ou 10 secondes sans changer le code |
 | 5 | Trois emplacements et cinq équipements communs pour les chasseurs ; course murale et fumigène pour les survivants | Comparer les outils de poursuite et de fuite |
 | 6 | Quatre joueurs et réapparition individuelle | Jouer un vrai 2 contre 2 sans interrompre les autres après une touche |
 | 7 | Barricade et une pièce à leviers | Tester interception, secrets et possibilités de sortie |
@@ -258,6 +295,9 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - Vérifier qu'un survivant peut réellement rompre le contact visuel, et qu'un chasseur peut le retrouver sans suivre un marqueur permanent.
 - Observer les taux de victoire par rôle, les durées de poursuite, les équipements utilisés et les endroits où les captures se produisent. Ne pas fixer un verdict sur une seule partie.
 - Vérifier les cas limites : deux coups simultanés, deux ralentissements, décès à la fin du chronomètre, dernière vie, deux survivants en protection et déconnexion.
+- Vérifier que tous les joueurs partagent la même échéance de fin de combat et que les comptes à rebours personnels ne la remplacent pas.
+- Avec les valeurs par défaut, vérifier qu'un deuxième dash est refusé avant 120 secondes et autorisé à partir de 120 secondes après l'activation ; faire le même contrôle à 60 secondes pour la lance. Vérifier que les joueurs et les armes ont des recharges indépendantes.
+- Modifier uniquement la configuration du dash à 60, 30 puis 10 secondes et vérifier que le comportement, l'affichage et la validation réseau suivent tous la nouvelle valeur dès la partie suivante. Vérifier également qu'une réapparition ou un changement d'arme ne contourne pas une recharge.
 - Tester la règle à moins de 30 m, exactement à 30 m et au-delà ; vérifier le rayon de 15 m et les murs pour le tonnerre.
 - Essayer de bloquer tous les trajets avec les pièges et de rester indéfiniment dans la pièce secrète ; corriger toute stratégie qui supprime les possibilités de réponse.
 - Tester les commandes inversées, le boost et la glissade au clavier comme au tactile.
@@ -285,4 +325,7 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : le dossier `games` est la racine du dépôt `git@github.com:lemhaba10/games.git` ; le jeu réside dans `killers`.
 - 11 octobre 2026 : confirmation de la vue à la première personne, à travers les yeux du personnage.
 - 11 octobre 2026 : ajout demandé d'équipements de fuite pour les survivants, avec course sur les murs et grenade fumigène gênant les chasseurs sans aveugler les survivants. Leurs valeurs d'équilibrage et leur rareté ne sont pas encore validées.
+- 11 octobre 2026 : confirmation d'un chronomètre de combat commun à tous les joueurs et géré par le jeu.
+- 11 octobre 2026 : recharge du dash de déplacement fixée à 120 secondes par défaut après activation. Après correction des créateurs, la lance possède sa propre recharge de 60 secondes, et chaque arme a un délai indépendant.
+- 11 octobre 2026 : tous les paramètres d'équilibrage doivent être faciles à configurer. Les 120 secondes du dash sont une valeur de départ qui pourra être remplacée notamment par 60, 30 ou 10 secondes pour les essais.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.

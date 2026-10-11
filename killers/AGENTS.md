@@ -12,6 +12,9 @@
 
 - Jeu en 3D à la première personne, à travers les yeux du personnage pour les deux rôles ; modes 1 chasseur contre 1 survivant et 2 chasseurs contre 2 survivants.
 - Trois vies par survivant, trois emplacements d'équipement par chasseur, 30 secondes pour se cacher et quatre minutes de survie.
+- Chronomètre de combat commun à tous les joueurs, géré par le jeu. Ne pas confondre ce choix confirmé avec les règles encore proposées de reprise du chronomètre après une perte de vie.
+- Recharge par défaut du dash de déplacement : 120 secondes dès l'activation, pour les deux rôles. Recharge par défaut de la lance : 60 secondes dès l'activation. Chaque joueur et chaque arme disposent de recharges indépendantes.
+- Tous les paramètres d'équilibrage doivent être facilement configurables sans modifier le code des mécaniques. Les valeurs par défaut sont des points de départ, pas des constantes dispersées dans le code.
 - En 2 contre 2, seul le survivant touché réapparaît ; les autres continuent. Ne pas réinitialiser toute la partie après une touche.
 - Les cinq premiers équipements de chasseur proposés par les créateurs sont communs : branche, règle, seringue, lance et bâton du tonnerre.
 - Les survivants ont aussi des équipements de fuite : course sur les murs et fumigène gênant la vision des chasseurs sans aveugler les survivants. Leur nombre d'emplacements, rareté et équilibrage restent à valider.
@@ -20,7 +23,7 @@
 ## Développement
 
 - Godot et GDScript sont la base proposée, à confirmer avant de créer le projet moteur.
-- Construire d'abord le prototype décrit dans la fiche, en gardant les réglages d'équilibrage modifiables.
+- Construire d'abord le prototype décrit dans la fiche, avec des ressources de configuration centralisées pour les règles, armes, déplacements et interactions. Le comportement, l'affichage et la validation réseau doivent lire les mêmes valeurs.
 - Vérifier tôt une vraie partie entre deux instances ; distinguer une simulation locale d'une validation sur deux appareils ou sur Internet.
 - Ne pas ajouter de compte joueur, boutique, classement ou serveur payant au premier prototype sans besoin établi.
 - Garder les identifiants, clés de signature et secrets hors du dépôt.
