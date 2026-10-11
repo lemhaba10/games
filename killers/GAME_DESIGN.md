@@ -10,7 +10,7 @@ Le plaisir recherché est partagé : réussir une poursuite doit être satisfais
 
 Les sections « Règles demandées » et « Décisions confirmées » consignent les choix exprimés par les créateurs. Toutes les valeurs introduites dans les sections « Proposition » sont des réglages de départ à essayer, pas des décisions déjà approuvées.
 
-La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu envisagé ; elle ne décrit pas un logiciel déjà réalisé.
+La vue à la première personne, le chronomètre commun géré par le jeu et les valeurs par défaut des recharges du dash et de la lance sont confirmés. Le comportement du chronomètre après une perte de vie et certaines interactions entre pouvoirs restent à choisir. Toutes les valeurs d'équilibrage doivent être faciles à configurer. Cette fiche décrit le jeu visé ; seule la première étape d'exploration en solo est actuellement implémentée.
 
 ## Règles demandées
 
@@ -313,7 +313,7 @@ Proposition technique : charger et valider la configuration au début de la part
 
 ## Proposition de base technique
 
-- Moteur : projet Godot créé dans `games/killers-game/project.godot`, avec la version de fonctionnalités 4.7 et le rendu Compatibility. GDScript est le langage retenu pour le développement prévu. Le projet moteur existe, mais aucune scène jouable n'est encore créée.
+- Moteur : projet Godot dans `games/killers-game/project.godot`, avec la version de fonctionnalités 4.7 et le rendu Compatibility. La première scène jouable `scenes/practice_arena.tscn` permet une exploration solo, avec un contrôleur en GDScript et une ressource de configuration `config/player_settings.tres`.
 - Premier support de développement : ordinateur. Prévoir tôt un essai Android ou iPhone pour évaluer les commandes et les performances.
 - Distribution visée : version ordinateur, puis Steam, Android et iOS. Steam est une boutique pour la version ordinateur.
 - Multijoueur : d'abord deux instances, puis deux appareils sur un réseau local ; préparer ensuite les connexions sur Internet.
@@ -327,7 +327,7 @@ Le prototype commence avec des joueurs de session sans compte. Les comptes et le
 
 | Étape | Contenu | Résultat attendu |
 | --- | --- | --- |
-| 1 | Caméra 3D à la première personne, déplacement, collisions, petite carte | Se déplacer et se cacher derrière un mur |
+| 1 réalisée | Caméra 3D à la première personne, déplacement, collisions, petite carte | Exploration solo disponible ; lancement et contrôles locaux validés sur Mac |
 | 2 | Joueur 1 et Joueur 2 en réseau local, identifiants de session, rôles et branche | Un joueur peut poursuivre et toucher l'autre, sans compte ni base de données |
 | 3 | Vies et durées configurables, chronomètre commun, préparation, poursuite, victoire et revanche | Jouer une partie 1 contre 1 complète |
 | 4 | Dash configurable, glissade et premiers réglages | Tester notamment une recharge de 120, 60, 30 ou 10 secondes sans changer le code |
@@ -381,4 +381,5 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 - 11 octobre 2026 : tous les paramètres d'équilibrage doivent être faciles à configurer. Les 120 secondes du dash sont une valeur de départ qui pourra être remplacée notamment par 60, 30 ou 10 secondes pour les essais.
 - 11 octobre 2026 : commencer sans compte ni base de données avec Joueur 1 à Joueur 4 ; prévoir ensuite des comptes avec pseudonymes, scores persistants et classement des meilleurs joueurs selon les victoires, avec des vues de type top 5 ou top 200. Le barème et la période du classement restent à définir.
 - 11 octobre 2026 : les créateurs initialisent le projet Godot dans `games/killers-game`, l'éditeur ayant demandé un dossier vide. Conserver ce dossier pour le jeu et `games/killers` pour la documentation ; le projet existant utilise Godot 4.7 avec le rendu Compatibility.
+- 11 octobre 2026 : réalisation demandée de la première étape. Ajout d'une arène d'exploration solo, du déplacement à la première personne, de collisions et de réglages modifiables dans l'inspecteur. Validation locale sous Godot 4.7.2 sur Mac ; l'équilibrage en poursuite, le multijoueur et les appareils mobiles restent à tester lors des étapes suivantes.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.

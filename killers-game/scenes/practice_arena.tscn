@@ -1,0 +1,411 @@
+[gd_scene load_steps=37 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/practice_arena.gd" id="2_arena"]
+[ext_resource type="Shader" path="res://materials/floor.gdshader" id="3_floor"]
+
+[sub_resource type="Environment" id="Environment_day"]
+background_mode = 1
+background_color = Color(0.48, 0.63, 0.71, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.78, 0.85, 0.92, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 0
+
+[sub_resource type="ShaderMaterial" id="Material_floor"]
+shader = ExtResource("3_floor")
+
+[sub_resource type="StandardMaterial3D" id="Material_wall"]
+albedo_color = Color(0.68, 0.72, 0.71, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Material_teal"]
+albedo_color = Color(0.12, 0.51, 0.49, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Material_clay"]
+albedo_color = Color(0.72, 0.33, 0.22, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Material_gold"]
+albedo_color = Color(0.86, 0.65, 0.25, 1)
+roughness = 0.85
+
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+bg_color = Color(0.035, 0.075, 0.10, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.39, 0.43, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_left = 18
+corner_radius_bottom_right = 18
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+bg_color = Color(0.10, 0.47, 0.43, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+[sub_resource type="StyleBoxFlat" id="Style_hover"]
+bg_color = Color(0.15, 0.60, 0.53, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+[sub_resource type="BoxMesh" id="Mesh_0"]
+material = SubResource("Material_floor")
+size = Vector3(30, 0.4, 30)
+
+[sub_resource type="BoxShape3D" id="Shape_0"]
+size = Vector3(30, 0.4, 30)
+
+[sub_resource type="BoxMesh" id="Mesh_1"]
+material = SubResource("Material_wall")
+size = Vector3(30, 3.2, 0.6)
+
+[sub_resource type="BoxShape3D" id="Shape_1"]
+size = Vector3(30, 3.2, 0.6)
+
+[sub_resource type="BoxMesh" id="Mesh_2"]
+material = SubResource("Material_wall")
+size = Vector3(30, 3.2, 0.6)
+
+[sub_resource type="BoxShape3D" id="Shape_2"]
+size = Vector3(30, 3.2, 0.6)
+
+[sub_resource type="BoxMesh" id="Mesh_3"]
+material = SubResource("Material_wall")
+size = Vector3(0.6, 3.2, 30)
+
+[sub_resource type="BoxShape3D" id="Shape_3"]
+size = Vector3(0.6, 3.2, 30)
+
+[sub_resource type="BoxMesh" id="Mesh_4"]
+material = SubResource("Material_wall")
+size = Vector3(0.6, 3.2, 30)
+
+[sub_resource type="BoxShape3D" id="Shape_4"]
+size = Vector3(0.6, 3.2, 30)
+
+[sub_resource type="BoxMesh" id="Mesh_5"]
+material = SubResource("Material_clay")
+size = Vector3(8, 3.2, 0.6)
+
+[sub_resource type="BoxShape3D" id="Shape_5"]
+size = Vector3(8, 3.2, 0.6)
+
+[sub_resource type="BoxMesh" id="Mesh_6"]
+material = SubResource("Material_teal")
+size = Vector3(0.6, 3.2, 9)
+
+[sub_resource type="BoxShape3D" id="Shape_6"]
+size = Vector3(0.6, 3.2, 9)
+
+[sub_resource type="BoxMesh" id="Mesh_7"]
+material = SubResource("Material_gold")
+size = Vector3(0.6, 3.2, 8)
+
+[sub_resource type="BoxShape3D" id="Shape_7"]
+size = Vector3(0.6, 3.2, 8)
+
+[sub_resource type="BoxMesh" id="Mesh_8"]
+material = SubResource("Material_teal")
+size = Vector3(8, 3.2, 0.6)
+
+[sub_resource type="BoxShape3D" id="Shape_8"]
+size = Vector3(8, 3.2, 0.6)
+
+[sub_resource type="BoxMesh" id="Mesh_9"]
+material = SubResource("Material_teal")
+size = Vector3(3, 2.4, 3)
+
+[sub_resource type="BoxShape3D" id="Shape_9"]
+size = Vector3(3, 2.4, 3)
+
+[sub_resource type="BoxMesh" id="Mesh_10"]
+material = SubResource("Material_clay")
+size = Vector3(3, 2.4, 3)
+
+[sub_resource type="BoxShape3D" id="Shape_10"]
+size = Vector3(3, 2.4, 3)
+
+[sub_resource type="BoxMesh" id="Mesh_11"]
+material = SubResource("Material_gold")
+size = Vector3(2, 2.4, 2)
+
+[sub_resource type="BoxShape3D" id="Shape_11"]
+size = Vector3(2, 2.4, 2)
+
+[node name="PracticeArena" type="Node3D"]
+script = ExtResource("2_arena")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_day")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-52, -28, 0)
+light_color = Color(1, 0.92, 0.80, 1)
+light_energy = 1.25
+shadow_enabled = true
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry"]
+position = Vector3(0, -0.2, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/Floor"]
+mesh = SubResource("Mesh_0")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/Floor"]
+shape = SubResource("Shape_0")
+
+[node name="NorthWall" type="StaticBody3D" parent="Geometry"]
+position = Vector3(0, 1.6, -15)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/NorthWall"]
+mesh = SubResource("Mesh_1")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/NorthWall"]
+shape = SubResource("Shape_1")
+
+[node name="SouthWall" type="StaticBody3D" parent="Geometry"]
+position = Vector3(0, 1.6, 15)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/SouthWall"]
+mesh = SubResource("Mesh_2")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/SouthWall"]
+shape = SubResource("Shape_2")
+
+[node name="WestWall" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-15, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/WestWall"]
+mesh = SubResource("Mesh_3")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/WestWall"]
+shape = SubResource("Shape_3")
+
+[node name="EastWall" type="StaticBody3D" parent="Geometry"]
+position = Vector3(15, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/EastWall"]
+mesh = SubResource("Mesh_4")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/EastWall"]
+shape = SubResource("Shape_4")
+
+[node name="CentralWall" type="StaticBody3D" parent="Geometry"]
+position = Vector3(0, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/CentralWall"]
+mesh = SubResource("Mesh_5")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/CentralWall"]
+shape = SubResource("Shape_5")
+
+[node name="WestPassage" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-7, 1.6, -3)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/WestPassage"]
+mesh = SubResource("Mesh_6")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/WestPassage"]
+shape = SubResource("Shape_6")
+
+[node name="EastPassage" type="StaticBody3D" parent="Geometry"]
+position = Vector3(7, 1.6, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/EastPassage"]
+mesh = SubResource("Mesh_7")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/EastPassage"]
+shape = SubResource("Shape_7")
+
+[node name="NorthPassage" type="StaticBody3D" parent="Geometry"]
+position = Vector3(3, 1.6, -8)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/NorthPassage"]
+mesh = SubResource("Mesh_8")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/NorthPassage"]
+shape = SubResource("Shape_8")
+
+[node name="WestCover" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-9, 1.2, 7)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/WestCover"]
+mesh = SubResource("Mesh_9")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/WestCover"]
+shape = SubResource("Shape_9")
+
+[node name="EastCover" type="StaticBody3D" parent="Geometry"]
+position = Vector3(10, 1.2, 9)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/EastCover"]
+mesh = SubResource("Mesh_10")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/EastCover"]
+shape = SubResource("Shape_10")
+
+[node name="NorthCover" type="StaticBody3D" parent="Geometry"]
+position = Vector3(-10, 1.2, -10)
+
+[node name="Mesh" type="MeshInstance3D" parent="Geometry/NorthCover"]
+mesh = SubResource("Mesh_11")
+
+[node name="Collision" type="CollisionShape3D" parent="Geometry/NorthCover"]
+shape = SubResource("Shape_11")
+
+[node name="Landmark" type="Label3D" parent="."]
+position = Vector3(0, 2.25, 0.32)
+pixel_size = 0.009
+text = "01 / LA COUR"
+font_size = 58
+outline_size = 4
+modulate = Color(1, 0.95, 0.83, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector3(0, 0.1, 10)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 22.0
+offset_right = 450.0
+offset_bottom = 60.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 27
+text = "KILLERS  /  Terrain d'essai"
+
+[node name="PlayerName" type="Label" parent="HUD"]
+offset_left = 30.0
+offset_top = 61.0
+offset_right = 400.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 16
+text = "Joueur 1 · Exploration libre"
+
+[node name="Help" type="Label" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -46.0
+offset_right = -28.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 17
+text = "ZQSD / WASD / flèches : bouger     Souris : regarder     Maj : marcher     R : retour     Échap : menu"
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -16.0
+offset_right = 12.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 24
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Overlay" type="ColorRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0.025, 0.04, 0.55)
+
+[node name="Center" type="CenterContainer" parent="HUD/Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="HUD/Overlay/Center"]
+custom_minimum_size = Vector2(490, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Margin" type="MarginContainer" parent="HUD/Overlay/Center/Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="HUD/Overlay/Center/Card/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Eyebrow" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43, 0.84, 0.73, 1)
+theme_override_font_sizes/font_size = 15
+text = "KILLERS · PREMIERS PAS"
+
+[node name="Heading" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Explorez le labyrinthe"
+
+[node name="Description" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.82, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Repérez les passages et les cachettes.
+Contournez les murs et prenez vos marques."
+
+[node name="Controls" type="Label" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "ZQSD / WASD / flèches    Se déplacer
+Souris                              Regarder autour de soi
+Maj                                  Marcher doucement
+R                                      Revenir au départ
+Échap                               Libérer la souris"
+
+[node name="Resume" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("Style_button")
+theme_override_styles/hover = SubResource("Style_hover")
+theme_override_styles/pressed = SubResource("Style_button")
+text = "Explorer"
+
+[node name="Reset" type="Button" parent="HUD/Overlay/Center/Card/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Revenir au point de départ"
+flat = true
