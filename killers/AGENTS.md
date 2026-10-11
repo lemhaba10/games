@@ -3,7 +3,7 @@
 ## Contexte et référence
 
 - Répondre en français, avec des explications accessibles aux créateurs du jeu.
-- Le dépôt Git se trouve dans le dossier parent `games`. Conserver le jeu et sa documentation dans `killers`. Ne pas créer de dépôt Git imbriqué.
+- Le dépôt Git se trouve dans le dossier parent `games`. Conserver le projet Godot et le code dans `killers-game`, et la documentation de conception dans `killers`. Ne pas créer de dépôt Git imbriqué.
 - Lire `GAME_DESIGN.md` avant de proposer ou modifier une mécanique de jeu.
 - La fiche distingue les règles demandées, les propositions de prototype et les décisions ouvertes. Une proposition ne constitue pas une validation des créateurs.
 - Après une décision explicite des créateurs, mettre à jour la section correspondante et le journal des décisions. Ne pas transformer silencieusement une hypothèse en règle confirmée.
@@ -23,7 +23,7 @@
 
 ## Développement
 
-- Godot et GDScript sont la base proposée, à confirmer avant de créer le projet moteur.
+- Le projet Godot est créé dans `../killers-game/project.godot`, avec la version de fonctionnalités 4.7 et le rendu Compatibility. Utiliser GDScript pour le développement prévu.
 - Construire d'abord le prototype décrit dans la fiche, avec des ressources de configuration centralisées pour les règles, armes, déplacements et interactions. Le comportement, l'affichage et la validation réseau doivent lire les mêmes valeurs.
 - Vérifier tôt une vraie partie entre deux instances ; distinguer une simulation locale d'une validation sur deux appareils ou sur Internet.
 - Respecter le report explicite des comptes, de la base de données et du classement à une version suivante. Ne pas ajouter de boutique ou de serveur payant au premier prototype sans besoin établi.

@@ -51,6 +51,7 @@ Le terme « chasseur » désigne ici le rôle aussi appelé « tueur » dans l'i
 - La **charge de la lance se recharge en 60 secondes par défaut à partir de son activation**. Chaque arme possède son propre délai indépendant ; cette correction remplace l'idée précédente de deux minutes pour la lance.
 - **Toutes les valeurs d'équilibrage doivent être configurables facilement**, y compris les recharges. Les 120 secondes du dash sont une valeur de départ, pas une constante définitive : les créateurs pourront essayer 60, 30, 10 secondes ou d'autres valeurs.
 - Commencer avec **Joueur 1 à Joueur 4**, sans comptes ni base de données pour le prototype. Prévoir ensuite des comptes, pseudonymes, scores persistants et un classement fondé sur les victoires, avec des vues de type top 5 ou top 200.
+- Le projet Godot créé par les créateurs se trouve dans **`games/killers-game`**. La documentation reste dans **`games/killers`**, et le dépôt Git commun est **`games`**.
 
 ## Proposition de déroulement d'une partie
 
@@ -312,7 +313,7 @@ Proposition technique : charger et valider la configuration au début de la part
 
 ## Proposition de base technique
 
-- Moteur : Godot, avec GDScript ; choix proposé lors de la première discussion, à confirmer avant installation et création du projet.
+- Moteur : projet Godot créé dans `games/killers-game/project.godot`, avec la version de fonctionnalités 4.7 et le rendu Compatibility. GDScript est le langage retenu pour le développement prévu. Le projet moteur existe, mais aucune scène jouable n'est encore créée.
 - Premier support de développement : ordinateur. Prévoir tôt un essai Android ou iPhone pour évaluer les commandes et les performances.
 - Distribution visée : version ordinateur, puis Steam, Android et iOS. Steam est une boutique pour la version ordinateur.
 - Multijoueur : d'abord deux instances, puis deux appareils sur un réseau local ; préparer ensuite les connexions sur Internet.
@@ -359,25 +360,25 @@ Faire un premier essai des commandes mobiles dès l'étape 1 ou 4, même si leur
 ## Décisions encore ouvertes
 
 1. Valider le nombre d'emplacements des survivants, les noms et raretés de leurs équipements, ainsi que les réglages de course murale et de fumée.
-2. Confirmer Godot et GDScript pour réaliser le prototype.
-3. En 1 contre 1, les quatre minutes recommencent-elles après chaque vie perdue ?
-4. En 2 contre 2, valider le chronomètre continu, la protection personnelle de 30 secondes et la victoire possible pendant cette protection.
-5. La seringue et le tonnerre retirent-ils aussi une vie, ou appliquent-ils seulement leur effet ?
-6. Le bâton du tonnerre affecte-t-il tous les adversaires visibles à portée ou une seule cible ?
-7. Les trois emplacements des chasseurs peuvent-ils contenir uniquement des outils sans dégâts ? Les pièges occupent-ils un de ces emplacements ?
-8. Quelle direction artistique : cartoon, inquiétante, autre ? Quels ordinateurs et téléphones utiliser pour les premiers essais ?
-9. Comment obtenir les futurs équipements rares et comment présenter les résultats d'une revanche avec rôles inversés ?
-10. Pour la version avec comptes : confirmer le barème, les égalités, les périodes du classement, les règles d'abandon et la méthode de validation des résultats. Choisir ensuite le service de comptes, la base de données et l'hébergement.
+2. En 1 contre 1, les quatre minutes recommencent-elles après chaque vie perdue ?
+3. En 2 contre 2, valider le chronomètre continu, la protection personnelle de 30 secondes et la victoire possible pendant cette protection.
+4. La seringue et le tonnerre retirent-ils aussi une vie, ou appliquent-ils seulement leur effet ?
+5. Le bâton du tonnerre affecte-t-il tous les adversaires visibles à portée ou une seule cible ?
+6. Les trois emplacements des chasseurs peuvent-ils contenir uniquement des outils sans dégâts ? Les pièges occupent-ils un de ces emplacements ?
+7. Quelle direction artistique : cartoon, inquiétante, autre ? Quels ordinateurs et téléphones utiliser pour les premiers essais ?
+8. Comment obtenir les futurs équipements rares et comment présenter les résultats d'une revanche avec rôles inversés ?
+9. Pour la version avec comptes : confirmer le barème, les égalités, les périodes du classement, les règles d'abandon et la méthode de validation des résultats. Choisir ensuite le service de comptes, la base de données et l'hébergement.
 
 ## Journal des décisions
 
 - 11 octobre 2026 : définition initiale par les créateurs des modes 1 contre 1 et 2 contre 2, du jeu en 3D, des trois vies, des boosts, du labyrinthe, des pièges, des secrets, des cinq équipements communs et des futures raretés.
 - 11 octobre 2026 : confirmation explicite qu'en 2 contre 2, seul le survivant touché réapparaît et que les autres continuent.
-- 11 octobre 2026 : le dossier `games` est la racine du dépôt `git@github.com:lemhaba10/games.git` ; le jeu réside dans `killers`.
+- 11 octobre 2026 : le dossier `games` est la racine du dépôt `git@github.com:lemhaba10/games.git` ; la conception initiale est enregistrée dans `killers`.
 - 11 octobre 2026 : confirmation de la vue à la première personne, à travers les yeux du personnage.
 - 11 octobre 2026 : ajout demandé d'équipements de fuite pour les survivants, avec course sur les murs et grenade fumigène gênant les chasseurs sans aveugler les survivants. Leurs valeurs d'équilibrage et leur rareté ne sont pas encore validées.
 - 11 octobre 2026 : confirmation d'un chronomètre de combat commun à tous les joueurs et géré par le jeu.
 - 11 octobre 2026 : recharge du dash de déplacement fixée à 120 secondes par défaut après activation. Après correction des créateurs, la lance possède sa propre recharge de 60 secondes, et chaque arme a un délai indépendant.
 - 11 octobre 2026 : tous les paramètres d'équilibrage doivent être faciles à configurer. Les 120 secondes du dash sont une valeur de départ qui pourra être remplacée notamment par 60, 30 ou 10 secondes pour les essais.
 - 11 octobre 2026 : commencer sans compte ni base de données avec Joueur 1 à Joueur 4 ; prévoir ensuite des comptes avec pseudonymes, scores persistants et classement des meilleurs joueurs selon les victoires, avec des vues de type top 5 ou top 200. Le barème et la période du classement restent à définir.
+- 11 octobre 2026 : les créateurs initialisent le projet Godot dans `games/killers-game`, l'éditeur ayant demandé un dossier vide. Conserver ce dossier pour le jeu et `games/killers` pour la documentation ; le projet existant utilise Godot 4.7 avec le rendu Compatibility.
 - Les valeurs chiffrées d'équilibrage et les autres comportements décrits comme propositions n'ont pas encore été validés en jeu.

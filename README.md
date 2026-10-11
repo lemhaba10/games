@@ -7,7 +7,8 @@ Dépôt des projets de jeux de la famille.
 Jeu multijoueur de cache-cache et de poursuite en 3D, avec des chasseurs et des survivants. Modes prévus : 1 contre 1 et 2 contre 2.
 
 - [Présentation du projet](killers/README.md)
+- [Projet Godot à ouvrir](killers-game/project.godot)
 - [Règles et conception du jeu](killers/GAME_DESIGN.md)
 - [Consignes pour reprendre le développement](killers/AGENTS.md)
 
-Le dépôt contient actuellement la conception initiale. Le prototype jouable reste à créer.
+Le dossier `killers` contient la documentation et `killers-game` contient le projet Godot. Le dépôt Git est commun aux deux dossiers. Le projet moteur est initialisé ; le prototype jouable reste à créer.
